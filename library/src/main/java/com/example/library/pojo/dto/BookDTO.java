@@ -1,4 +1,4 @@
-package com.example.library.pojo.entity;
+package com.example.library.pojo.dto;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Book implements Serializable {
+public class BookDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Long id;
@@ -33,7 +33,7 @@ public class Book implements Serializable {
     // 描述信息
     private String description;
 
-    // 0 已出租 1 可租
+    // 0 不可租 1 可租
     private Integer status;
 
     private LocalDateTime createTime;

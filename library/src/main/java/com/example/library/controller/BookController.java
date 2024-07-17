@@ -1,25 +1,74 @@
 package com.example.library.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.library.pojo.dto.BookDTO;
 import com.example.library.pojo.entity.Student;
+import com.example.library.service.BookService;
+
+import io.swagger.annotations.Api;
 
 @RestController
+@RequestMapping("/admin/book")
+@Api(tags = "--------------BOOK--------------")
 public class BookController {
-    // @Autowired
-    // private BookService bookService;
+    @Autowired
+    private BookService bookService;
+
     /*
-     * 新增book
+     * C
      */
-    @PostMapping("/testPost/{id}")
+
+    @PostMapping("/{id}")
+    public String insert(@RequestBody BookDTO bookDTO) { // 注解@RequestBody用于接收前端传递给后端的、JSON对象的字符串
+        bookService.insertBook();
+        return bookDTO.getName() + bookDTO.getDescription();
+    }
+
+    /*
+     * Read
+     */
+    @GetMapping("/{id}")
+    public String getbyId(@PathVariable Long id) {
+        return "没调Service getbyId";
+    }
+
+    /*
+     * Update
+     */
+    @PutMapping()
+    public String update(@RequestBody BookDTO bookDTO) {
+        return "没调Service update";
+    }
+
+    /*
+     * D
+     */
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable int id) {
+        // bookService.deleteBook(id);
+        return "没调Service delete";
+    }
+
+    /*
+     * TEST
+     */
+    @PostMapping("/Post/{id}")
     public String test1(@PathVariable int id, @RequestBody Student student) {
+        return "http://localhost:8080/testPost/123? body-row-json//" + student;
+    }
+
+    @PostMapping("/testPost/{id}")
+    public String test00(@PathVariable int id, @RequestBody Student student) {
         return "http://localhost:8080/testPost/123? body-row-json//" + student;
     }
 

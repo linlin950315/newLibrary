@@ -9,6 +9,7 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 
 @Configuration
+
 public class SpringFoxConfig {
     @Bean
     public Docket api() {
@@ -18,4 +19,5 @@ public class SpringFoxConfig {
                 .paths(PathSelectors.any())
                 .build();
     }
+
 }
