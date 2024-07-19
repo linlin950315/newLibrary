@@ -1,17 +1,11 @@
 package com.example.library.service;
 
-import org.springframework.stereotype.Service;
+import com.example.library.pojo.dto.BookDTO;
 
-@Service
-public class BookService {
+public interface BookService {
     /**
      * 新增book
-     * 
-     * @return
-     *
      */
-    public String insertBook() {
-        return "new Book";
-    }
+    void insertBook(BookDTO bookDTO);
 
 }

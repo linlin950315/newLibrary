@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 public class BookDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private Long id;
+    private String id;
 
     // 名称
     private String name;

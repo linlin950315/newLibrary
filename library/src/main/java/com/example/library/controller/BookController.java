@@ -29,9 +29,10 @@ public class BookController {
      */
 
     @PostMapping("/{id}")
+
     public String insert(@RequestBody BookDTO bookDTO) { // 注解@RequestBody用于接收前端传递给后端的、JSON对象的字符串
-        bookService.insertBook();
-        return bookDTO.getName() + bookDTO.getDescription();
+        bookService.insertBook(bookDTO);
+        return bookDTO.getId();
     }
 
     /*
@@ -39,7 +40,7 @@ public class BookController {
      */
     @GetMapping("/{id}")
     public String getbyId(@PathVariable Long id) {
-        return "没调Service getbyId";
+        return id + "没调Service getbyId";
     }
 
     /*
@@ -47,16 +48,16 @@ public class BookController {
      */
     @PutMapping()
     public String update(@RequestBody BookDTO bookDTO) {
-        return "没调Service update";
+        return bookDTO.getName() + "没调Service update";
     }
 
     /*
      * D
      */
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable int id) {
+    public String delete(@RequestBody String id) {
         // bookService.deleteBook(id);
-        return "没调Service delete";
+        return id + "没调Service delete";
     }
 
     /*
