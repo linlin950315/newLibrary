@@ -1,5 +1,7 @@
 package com.example.library.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.library.pojo.dto.BookDTO;
+import com.example.library.pojo.entity.Book;
 import com.example.library.pojo.entity.Student;
 import com.example.library.service.BookService;
 
@@ -44,11 +47,12 @@ public class BookController {
     }
 
     /*
-     * Read 查全部
+     * Read ALL
      */
-    @GetMapping("/page")
-    public String getbyId(@PathVariable Long id) {
-        return id + "没调Service getbyId";
+    @GetMapping()
+    public List<Book> getall() {
+        return bookService.getBookList();
+
     }
 
     /*

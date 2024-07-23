@@ -1,5 +1,7 @@
 package com.example.library.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,5 +31,10 @@ public class BookServiceImpl implements BookService {
         System.out.println("Deleting book with id:" + id);
         System.out.println("------");
         bookMapper.delete(id);
+    }
+
+    // R
+    public List<Book> getBookList() {
+        return bookMapper.readAll();
     }
 }
