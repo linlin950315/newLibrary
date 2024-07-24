@@ -33,4 +33,10 @@ public interface BookMapper {
      */
     @Select("select * from book")
     List<Book> readAll();
+
+    /**
+     * U
+     */
+
+    void update(Book book);
 }

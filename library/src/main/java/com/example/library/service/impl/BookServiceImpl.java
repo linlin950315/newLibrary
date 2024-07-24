@@ -20,10 +20,11 @@ public class BookServiceImpl implements BookService {
 
     // C
     @Override
-    public void insertBook(BookDTO bookDTO) {
+    public List<Book> insertBook(BookDTO bookDTO) {
         Book book = new Book();
         BeanUtils.copyProperties(bookDTO, book);
         bookMapper.insert(book);
+        return null;
     }
 
     // D
@@ -35,6 +36,15 @@ public class BookServiceImpl implements BookService {
 
     // R
     public List<Book> getBookList() {
-        return bookMapper.readAll();
+        bookMapper.readAll();
+        return null;
+    }
+
+    // D
+    public List<Book> updateBook(BookDTO bookDTO) {
+        Book book = new Book();
+        BeanUtils.copyProperties(bookDTO, book);
+        bookMapper.update(book);
+        return null;
     }
 }

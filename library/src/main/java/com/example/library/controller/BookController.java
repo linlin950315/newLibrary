@@ -1,7 +1,5 @@
 package com.example.library.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.library.pojo.dto.BookDTO;
-import com.example.library.pojo.entity.Book;
 import com.example.library.pojo.entity.Student;
 import com.example.library.service.BookService;
 
@@ -32,26 +29,26 @@ public class BookController {
      */
     @PostMapping()
 
-    public String insert(@RequestBody BookDTO bookDTO) { // 注解@RequestBody用于接收前端传递给后端的、JSON对象的字符串
+    public void insert(@RequestBody BookDTO bookDTO) { // 注解@RequestBody用于接收前端传递给后端的、JSON对象的字符串
         bookService.insertBook(bookDTO);
-        return bookDTO.getId() + bookDTO.getName();
+        // return bookDTO.getId() + bookDTO.getName();
     }
 
     /*
      * D
      */
     @DeleteMapping("/{id}")
-    public String deleteById(@PathVariable String id) {
+    public void deleteById(@PathVariable String id) {
         bookService.deleteBook(id);
-        return "deleteById" + id;
+        // return "deleteById" + id;
     }
 
     /*
      * Read ALL
      */
     @GetMapping()
-    public List<Book> getall() {
-        return bookService.getBookList();
+    public void getall() {
+        bookService.getBookList();
 
     }
 
@@ -59,8 +56,8 @@ public class BookController {
      * Update
      */
     @PutMapping()
-    public String update(@RequestBody BookDTO bookDTO) {
-        return bookDTO.getName() + "没调Service update";
+    public void update(@RequestBody BookDTO bookDTO) {
+        bookService.updateBook(bookDTO);
     }
 
     /*
