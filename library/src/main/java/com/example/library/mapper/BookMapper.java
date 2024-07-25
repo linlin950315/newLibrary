@@ -7,11 +7,11 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.example.library.pojo.entity.Book;
 
 @Mapper
-
 public interface BookMapper {
     /**
      * C
@@ -37,6 +37,12 @@ public interface BookMapper {
     /**
      * U
      */
-
-    void update(Book book);
+    @Update("<script>"
+            + "UPDATE Book "
+            + "<set>"
+            + "<if test='name != null'> name = #{name}, </if>"
+            + "</set>"
+            + "WHERE id = #{id}"
+            + "</script>")
+    void update(Book book); // debug这行不走 但注掉，就启动不起来
 }

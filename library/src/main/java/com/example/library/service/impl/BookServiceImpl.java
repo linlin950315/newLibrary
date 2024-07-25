@@ -44,6 +44,7 @@ public class BookServiceImpl implements BookService {
     public List<Book> updateBook(BookDTO bookDTO) {
         Book book = new Book();
         BeanUtils.copyProperties(bookDTO, book);
+        System.out.println("BookServiceImpl: ------------Calling bookMapper.update(book)-----------");
         bookMapper.update(book);
         return null;
     }
