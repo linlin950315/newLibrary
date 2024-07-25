@@ -1,14 +1,12 @@
 package com.example.library.pojo.dto;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import lombok.Data;
 
 @Data
-
-public class BookDTO implements Serializable {
+public class StudentDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String id;
@@ -19,26 +17,20 @@ public class BookDTO implements Serializable {
     // 分类id
     private Long categoryId;
 
-    // 价格
-    private BigDecimal price;
-
     // 图片
     private String image;
 
     // 描述信息
     private String description;
 
-    // 总数量
-    private int total;
-
     // 0 不可租 1 可租
     private Integer status;
-
-    private LocalDateTime createTime;
-
-    private LocalDateTime updateTime;
 
     private Long createUser;
 
     private Long updateUser;
+
+    private LocalDateTime createTime;
+
+    private LocalDateTime updateTime;
 }
