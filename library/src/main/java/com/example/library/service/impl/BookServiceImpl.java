@@ -28,10 +28,10 @@ public class BookServiceImpl implements BookService {
     }
 
     // D
-    public void deleteBook(String id) {
-        System.out.println("Deleting book with id:" + id);
+    public void deleteBook(int book_id) {
+        System.out.println("Deleting book with id:" + book_id);
         System.out.println("------");
-        bookMapper.delete(id);
+        bookMapper.delete(book_id);
     }
 
     // R

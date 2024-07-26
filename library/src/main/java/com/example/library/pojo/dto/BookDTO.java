@@ -11,10 +11,10 @@ import lombok.Data;
 public class BookDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private String id;
+    private int book_id;
 
     // 名称
-    private String name;
+    private String book_name;
 
     // 分类id
     private Long categoryId;
@@ -22,14 +22,11 @@ public class BookDTO implements Serializable {
     // 价格
     private BigDecimal price;
 
-    // 图片
-    private String image;
-
     // 描述信息
     private String description;
 
     // 总数量
-    private int total;
+    private int counts;
 
     // 0 不可租 1 可租
     private Integer status;

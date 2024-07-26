@@ -10,7 +10,7 @@ public interface BookService {
     List<Book> insertBook(BookDTO bookDTO);
 
     // D
-    void deleteBook(String id);
+    void deleteBook(int book_id);
 
     // R
     List<Book> getBookList();

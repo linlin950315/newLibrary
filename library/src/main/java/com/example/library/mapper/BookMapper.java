@@ -13,36 +13,36 @@ import com.example.library.pojo.entity.Book;
 
 @Mapper
 public interface BookMapper {
-    /**
-     * C
-     */
-    @Insert("insert into book(id,name)"
-            +
-            "values" +
-            "(#{id},#{name})")
-    void insert(Book book);
+        /**
+         * C
+         */
+        @Insert("insert into book(book_id,book_name,counts)"
+                        +
+                        "values" +
+                        "(#{book_id},#{book_name},#{counts})")
+        void insert(Book book);
 
-    /**
-     * D
-     */
-    @Delete("delete from book where id = #{id}")
-    void delete(@Param("id") String id);
+        /**
+         * D
+         */
+        @Delete("delete from book where book_id = #{book_id}")
+        void delete(@Param("book_id") int book_id);
 
-    /**
-     * R
-     */
-    @Select("select * from book")
-    List<Book> readAll();
+        /**
+         * R
+         */
+        @Select("select * from book")
+        List<Book> readAll();
 
-    /**
-     * U
-     */
-    @Update("<script>"
-            + "UPDATE Book "
-            + "<set>"
-            + "<if test='name != null'> name = #{name}, </if>"
-            + "</set>"
-            + "WHERE id = #{id}"
-            + "</script>")
-    void update(Book book); // debug这行不走 但注掉，就启动不起来
+        /**
+         * U
+         */
+        @Update("<script>"
+                        + "UPDATE Book "
+                        + "<set>"
+                        + "<if test='name != null'> name = #{name}, </if>"
+                        + "</set>"
+                        + "WHERE id = #{id}"
+                        + "</script>")
+        void update(Book book); // debug这行不走 但注掉，就启动不起来
 }
