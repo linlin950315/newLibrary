@@ -19,12 +19,10 @@ public class BookServiceImpl implements BookService {
     private BookMapper bookMapper;
 
     // C
-    @Override
-    public List<Book> insertBook(BookDTO bookDTO) {
+    public void insertBook(BookDTO bookDTO) {
         Book book = new Book();
         BeanUtils.copyProperties(bookDTO, book);
         bookMapper.insert(book);
-        return null;
     }
 
     // D
@@ -37,15 +35,16 @@ public class BookServiceImpl implements BookService {
     // R
     public List<Book> getBookList() {
         bookMapper.readAll();
-        return null;
+        // 2.设置书的状态
+
+        return bookMapper.readAll();
     }
 
-    // D
-    public List<Book> updateBook(BookDTO bookDTO) {
+    // U
+    public void updateBook(BookDTO bookDTO) {
         Book book = new Book();
         BeanUtils.copyProperties(bookDTO, book);
         System.out.println("BookServiceImpl: ------------Calling bookMapper.update(book)-----------");
         bookMapper.update(book);
-        return null;
     }
 }

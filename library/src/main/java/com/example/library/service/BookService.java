@@ -7,7 +7,7 @@ import com.example.library.pojo.entity.Book;
 
 public interface BookService {
     // C
-    List<Book> insertBook(BookDTO bookDTO);
+    void insertBook(BookDTO bookDTO);
 
     // D
     void deleteBook(int book_id);
@@ -16,6 +16,6 @@ public interface BookService {
     List<Book> getBookList();
 
     // U
-    List<Book> updateBook(BookDTO bookDTO);
+    void updateBook(BookDTO bookDTO);
 
 }

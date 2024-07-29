@@ -40,9 +40,9 @@ public interface BookMapper {
         @Update("<script>"
                         + "UPDATE Book "
                         + "<set>"
-                        + "<if test='name != null'> name = #{name}, </if>"
+                        + "<if test='book_name != null'> book_name = #{book_name}, </if>"
                         + "</set>"
-                        + "WHERE id = #{id}"
+                        + "WHERE book_id = #{book_id}"
                         + "</script>")
         void update(Book book); // debug这行不走 但注掉，就启动不起来
 }
