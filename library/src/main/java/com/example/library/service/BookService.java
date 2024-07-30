@@ -15,7 +15,13 @@ public interface BookService {
     // R
     List<Book> getBookList();
 
+    // Read by ID
+    Book getBookById(int book_id);
+
     // U
     void updateBook(BookDTO bookDTO);
+
+    // Update 借书 数量-1
+    void borrowABook(Book book);
 
 }

@@ -2,6 +2,6 @@ package com.example.library.service;
 
 public interface LendService {
 
-    void addlend();
+    void addlend(int student_id, int ids);
 
 }

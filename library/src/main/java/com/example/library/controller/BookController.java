@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.library.pojo.dto.BookDTO;
+import com.example.library.pojo.entity.Book;
 import com.example.library.pojo.entity.Student;
+import com.example.library.result.Result;
 import com.example.library.service.BookService;
 
 import io.swagger.annotations.Api;
@@ -51,11 +53,29 @@ public class BookController {
     }
 
     /*
+     * Read by ID
+     */
+    @GetMapping("/{book_id}")
+    // LIST IMPORT
+    public Result<Book> getById(@PathVariable int book_id) {
+        Book bookInfo = bookService.getBookById(book_id);
+        return Result.success(bookInfo);
+    }
+
+    /*
      * Update
      */
     @PutMapping()
     public void update(@RequestBody BookDTO bookDTO) {
         bookService.updateBook(bookDTO);
+    }
+
+    /*
+     * Update 借书 数量-1
+     */
+    @PutMapping("/{book_id}")
+    public void updateBook(@RequestBody Book book) {
+        bookService.borrowABook(book);
     }
 
     /*

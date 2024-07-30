@@ -14,13 +14,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Student implements Serializable {
     private static final long serialVersionUID = 1L;
-    private int student_id;
+
+    // id
+    public int student_id;
 
     // 名称
     private String student_name;
-
-    // 分类id
-    private Long studentId;
 
     // 0 不可租 1 可租
     private Integer status;

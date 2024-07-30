@@ -35,6 +35,14 @@ public interface BookMapper {
         List<Book> readAll();
 
         /**
+         * Read by ID
+         * 
+         * @return
+         */
+        @Select("select * from book where book_id = #{book_id}")
+        Book getById(int book_id);
+
+        /**
          * U
          */
         @Update("<script>"
@@ -45,4 +53,9 @@ public interface BookMapper {
                         + "WHERE book_id = #{book_id}"
                         + "</script>")
         void update(Book book); // debug这行不走 但注掉，就启动不起来
+
+        // Update 借书 数量-1
+        @Update("update book set counts = counts - 1 where book_id = #{book_id}")
+        void borrowA(Book book2);
+
 }

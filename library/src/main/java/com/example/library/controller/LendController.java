@@ -18,9 +18,10 @@ public class LendController {
 
     /**
      * 借书
+     * * ids：字符串 书id的集合
      */
     @RequestMapping("/addLend")
-    public void borrow() {
-        lendService.addlend();
+    public void borrow(int student_id, int ids) {
+        lendService.addlend(student_id, ids);
     }
 }

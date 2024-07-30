@@ -19,6 +19,7 @@ public class BookServiceImpl implements BookService {
     private BookMapper bookMapper;
 
     // C
+    @Override
     public void insertBook(BookDTO bookDTO) {
         Book book = new Book();
         BeanUtils.copyProperties(bookDTO, book);
@@ -35,9 +36,13 @@ public class BookServiceImpl implements BookService {
     // R
     public List<Book> getBookList() {
         bookMapper.readAll();
-        // 2.设置书的状态
-
         return bookMapper.readAll();
+    }
+
+    // Read by ID
+    public Book getBookById(int book_id) {
+        Book bookInfo = bookMapper.getById(book_id);
+        return bookInfo;
     }
 
     // U
@@ -47,4 +52,29 @@ public class BookServiceImpl implements BookService {
         System.out.println("BookServiceImpl: ------------Calling bookMapper.update(book)-----------");
         bookMapper.update(book);
     }
+
+    // U counts-1
+    public void borrowABook(Book book) {
+        // 取得单本书的counts数
+        book.getCounts();
+        System.out.println("book2 counts: " + book.getCounts());
+        Book book2 = bookMapper.getById(book.getBook_id());
+        // System.out.println("book2: " + book);
+        // System.out.println("book2: " + book.getBook_id());
+        // System.out.println(book2);
+        // 若counts为0，则无法��出
+        if (book.getCounts() == 0) {
+            System.out.println("The book has already been borrowed out.");
+            return;
+        }
+        // ��出一本
+        bookMapper.borrowA(book);
+        // ��余数量-1
+        book.setCounts(book.getCounts() - 1);
+        // 再次更新counts
+        bookMapper.update(book);
+        System.out.println("Borrow successfully.");
+
+    }
+
 }
