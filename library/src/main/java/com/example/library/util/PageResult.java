@@ -1,4 +1,4 @@
-package com.example.library.result;
+package com.example.library.util;
 
 import java.io.Serializable;
 import java.util.List;

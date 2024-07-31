@@ -42,6 +42,7 @@ public class BookServiceImpl implements BookService {
     // Read by ID
     public Book getBookById(int book_id) {
         Book bookInfo = bookMapper.getById(book_id);
+        System.out.println("----------name-----------" + bookInfo);
         return bookInfo;
     }
 

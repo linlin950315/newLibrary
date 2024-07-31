@@ -1,10 +1,13 @@
 package com.example.library.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.library.service.LendService;
+import com.example.library.util.Result;
 
 import io.swagger.annotations.Api;
 
@@ -18,10 +21,12 @@ public class LendController {
 
     /**
      * 借书
-     * * ids：字符串 书id的集合
+     * *
      */
-    @RequestMapping("/addLend")
-    public void borrow(int student_id, int ids) {
-        lendService.addlend(student_id, ids);
+    @PutMapping("/addLend")
+    public Result<String> lendAbook(@RequestParam int book_id, @RequestParam int student_id) {
+        lendService.addlend(book_id, student_id);
+        return Result.success();
     }
+
 }

@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.library.pojo.dto.BookDTO;
 import com.example.library.pojo.entity.Book;
 import com.example.library.pojo.entity.Student;
-import com.example.library.result.Result;
 import com.example.library.service.BookService;
+import com.example.library.util.Result;
 
 import io.swagger.annotations.Api;
 
@@ -56,7 +56,6 @@ public class BookController {
      * Read by ID
      */
     @GetMapping("/{book_id}")
-    // LIST IMPORT
     public Result<Book> getById(@PathVariable int book_id) {
         Book bookInfo = bookService.getBookById(book_id);
         return Result.success(bookInfo);
