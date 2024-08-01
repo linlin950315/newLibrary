@@ -21,6 +21,7 @@ public class LendController {
 
     /**
      * 借书
+     * http://localhost:8080/admin/lend/addLend?book_id=4&student_id=1
      * *
      */
     @PutMapping("/addLend")

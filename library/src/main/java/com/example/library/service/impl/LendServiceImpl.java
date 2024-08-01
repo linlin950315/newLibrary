@@ -29,13 +29,18 @@ public class LendServiceImpl implements LendService {
             Lend lend = new Lend();
             lend.setStudent_id(student_id);
             lend.setBook_id(book_id);
+            bookMapper.decrementBookCount(book_id);
+
+            loanMapper.createLoan(loan);
             //
             // lendMapper.createLoan(loan);
             // bookMapper.decrementBookCount(book_id);
             // return true;
             // } else {
             // return false;
+
             // }
+
         }
     }
 }

@@ -58,4 +58,8 @@ public interface BookMapper {
         @Update("update book set counts = counts - 1 where book_id = #{book_id}")
         void borrowA(Book book2);
 
+        // 借书 数量—1
+        @Update("UPDATE book SET counts = counts - 1 WHERE book_id = #{book_id}")
+        void decrementBookCount(int book_id);
+
 }
