@@ -28,7 +28,7 @@ CREATE TABLE `book` (
   `author` varchar(100) DEFAULT NULL,
   `counts` int NOT NULL,
   PRIMARY KEY (`book_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,7 +37,7 @@ CREATE TABLE `book` (
 
 LOCK TABLES `book` WRITE;
 /*!40000 ALTER TABLE `book` DISABLE KEYS */;
-INSERT INTO `book` VALUES (1,'book1',NULL,9),(2,'book2',NULL,5),(3,'book3',NULL,4),(4,'b4',NULL,32);
+INSERT INTO `book` VALUES (1,'book1',NULL,9),(2,'book2',NULL,5),(3,'book3',NULL,3),(4,'b4',NULL,30);
 /*!40000 ALTER TABLE `book` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -49,15 +49,17 @@ DROP TABLE IF EXISTS `lend`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `lend` (
-  `book_id` int DEFAULT NULL,
-  `date_lend` datetime NOT NULL,
-  `date_return` datetime NOT NULL,
-  `student_id` varchar(11) DEFAULT NULL,
-  KEY `book_id` (`book_id`),
-  KEY `student_id` (`student_id`),
-  CONSTRAINT `lend_ibfk_1` FOREIGN KEY (`book_id`) REFERENCES `book` (`book_id`),
-  CONSTRAINT `lend_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `student` (`student_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `bookId` int DEFAULT NULL,
+  `date_lend` datetime DEFAULT NULL,
+  `date_return` datetime DEFAULT NULL,
+  `studentId` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `lend_id` int NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`lend_id`),
+  KEY `book_id` (`bookId`),
+  KEY `student_id` (`studentId`),
+  CONSTRAINT `lend_ibfk_1` FOREIGN KEY (`bookId`) REFERENCES `book` (`book_id`),
+  CONSTRAINT `lend_ibfk_2` FOREIGN KEY (`studentId`) REFERENCES `student` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,6 +68,7 @@ CREATE TABLE `lend` (
 
 LOCK TABLES `lend` WRITE;
 /*!40000 ALTER TABLE `lend` DISABLE KEYS */;
+INSERT INTO `lend` VALUES (4,NULL,NULL,'1',1),(3,NULL,NULL,'2',2);
 /*!40000 ALTER TABLE `lend` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -77,12 +80,12 @@ DROP TABLE IF EXISTS `student`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `student` (
-  `student_id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `student_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `rent_date` varchar(100) DEFAULT NULL,
   `return_date` varchar(100) DEFAULT NULL,
   `status` int DEFAULT NULL,
-  PRIMARY KEY (`student_id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -92,7 +95,7 @@ CREATE TABLE `student` (
 
 LOCK TABLES `student` WRITE;
 /*!40000 ALTER TABLE `student` DISABLE KEYS */;
-INSERT INTO `student` VALUES ('1','s1',NULL,NULL,NULL);
+INSERT INTO `student` VALUES ('1','s1',NULL,NULL,NULL),('2','S2',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `student` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -109,4 +112,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-07-26 18:17:46
+-- Dump completed on 2024-08-02 18:40:11

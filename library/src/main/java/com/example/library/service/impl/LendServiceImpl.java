@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.library.mapper.BookMapper;
+import com.example.library.mapper.LendMapper;
 import com.example.library.pojo.entity.Book;
 import com.example.library.pojo.entity.Lend;
 import com.example.library.service.LendService;
@@ -14,6 +15,8 @@ import com.example.library.service.LendService;
 public class LendServiceImpl implements LendService {
     @Autowired
     private BookMapper bookMapper;
+    @Autowired
+    private LendMapper lendMapper;
 
     // TODO 先判断是否可借书
     // 获取图书id的集合
@@ -27,19 +30,11 @@ public class LendServiceImpl implements LendService {
         Book book = bookMapper.getById(book_id);
         if (book.getCounts() > 0) {
             Lend lend = new Lend();
-            lend.setStudent_id(student_id);
-            lend.setBook_id(book_id);
-            bookMapper.decrementBookCount(book_id);
-
-            loanMapper.createLoan(loan);
+            lend.setStudentId(student_id);
+            lend.setBookId(book_id);
             //
-            // lendMapper.createLoan(loan);
-            // bookMapper.decrementBookCount(book_id);
-            // return true;
-            // } else {
-            // return false;
-
-            // }
+            bookMapper.decrementBookCount(book_id);
+            lendMapper.createLoan(lend);
 
         }
     }

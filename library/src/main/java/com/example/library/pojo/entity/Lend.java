@@ -15,7 +15,7 @@ public class Lend implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private int lend_id;
-    private int book_id;
-    public int student_id;
+    private int bookId;
+    public int studentId;
 
 }
