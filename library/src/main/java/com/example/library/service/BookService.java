@@ -21,7 +21,10 @@ public interface BookService {
     // U
     void updateBook(BookDTO bookDTO);
 
-    // Update 借书 数量-1
-    void borrowABook(Book book);
+    // // Update 借书 数量-1
+    // void borrowABook(Book book);
+
+    // // 还书 数量+1
+    // void returnABook(Book book);
 
 }

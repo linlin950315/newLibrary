@@ -55,27 +55,31 @@ public class BookServiceImpl implements BookService {
     }
 
     // U counts-1
-    public void borrowABook(Book book) {
-        // 取得单本书的counts数
-        book.getCounts();
-        System.out.println("book2 counts: " + book.getCounts());
-        Book book2 = bookMapper.getById(book.getBook_id());
-        // System.out.println("book2: " + book);
-        // System.out.println("book2: " + book.getBook_id());
-        // System.out.println(book2);
-        // 若counts为0，则无法��出
-        if (book.getCounts() == 0) {
-            System.out.println("The book has already been borrowed out.");
-            return;
-        }
-        // ��出一本
-        bookMapper.borrowA(book);
-        // ��余数量-1
-        book.setCounts(book.getCounts() - 1);
-        // 再次更新counts
-        bookMapper.update(book);
-        System.out.println("Borrow successfully.");
+    // public void borrowABook(Book book) {
+    // // 取得单本书的counts数
+    // book.getCounts();
+    // System.out.println("book2 counts: " + book.getCounts());
+    // Book book2 = bookMapper.getById(book.getBook_id());
+    // // System.out.println("book2: " + book);
+    // // System.out.println("book2: " + book.getBook_id());
+    // // System.out.println(book2);
+    // // 若counts为0，则无法借出
+    // if (book.getCounts() == 0) {
+    // System.out.println("The book has already been borrowed out.");
+    // return;
+    // }
+    // // 借出一本
+    // bookMapper.borrowA(book);
+    // // 剩余数量-1
+    // book.setCounts(book.getCounts() - 1);
+    // // 再次更新counts
+    // bookMapper.update(book);
+    // System.out.println("Borrow successfully.");
 
-    }
+    // }
 
+    // // U counts+1
+    // public void returnABook(Book book) {
+
+    // }
 }

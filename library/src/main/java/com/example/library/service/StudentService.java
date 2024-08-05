@@ -9,4 +9,6 @@ public interface StudentService {
     // C
     List<Student> insertStudent(StudentDTO studentDTO);
 
+    // Read by ID
+    Student getLentListById();
 }

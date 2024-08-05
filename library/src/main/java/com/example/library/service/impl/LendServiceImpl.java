@@ -27,13 +27,23 @@ public class LendServiceImpl implements LendService {
     @Override
     public void addlend(int book_id, int student_id) {
 
-        Book book = bookMapper.getById(book_id);
-        if (book.getCounts() > 0) {
+        Book book = bookMapper.getById(book_id);// select * from book where book_id = #{book_id}
+        // TODO不能借重复的书
+        if (book.getBook_id().equals(studentMakpper.getBookIdByStudentId(student_id))) {
+            System.out.println("------------The book has already been borrowed out.--------------");
+            // return;
+
+        }
+        if (book.getCounts() == 0) {
+            System.out.println("------------The book has already been borrowed out.--------------");
+            // return;
+        } else {
             Lend lend = new Lend();
             lend.setStudentId(student_id);
             lend.setBookId(book_id);
-            //
+            // 书数量-1
             bookMapper.decrementBookCount(book_id);
+            // 记录借书数据
             lendMapper.createLoan(lend);
 
         }

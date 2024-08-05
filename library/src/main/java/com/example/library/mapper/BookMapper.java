@@ -55,8 +55,8 @@ public interface BookMapper {
         void update(Book book); // debug这行不走 但注掉，就启动不起来
 
         // Update 借书 数量-1
-        @Update("update book set counts = counts - 1 where book_id = #{book_id}")
-        void borrowA(Book book2);
+        // @Update("update book set counts = counts - 1 where book_id = #{book_id}")
+        // void borrowA(Book book2);
 
         // 借书 数量—1
         @Update("UPDATE book SET counts = counts - 1 WHERE book_id = #{book_id}")

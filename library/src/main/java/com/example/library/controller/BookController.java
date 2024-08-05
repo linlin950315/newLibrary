@@ -69,13 +69,25 @@ public class BookController {
         bookService.updateBook(bookDTO);
     }
 
-    /*
-     * Update 借书 数量-1
+    // /*
+    // * Update 借书 数量-1
+    // */
+    // @PutMapping("/{book_id}")
+    // public void updateBook(@RequestBody Book book) {
+    // bookService.borrowABook(book);
+    // }
+
+    // /**
+    // * 还书 数量+1
+    // */
+    // // @PutMapping()
+    // public void updateBookReturn(@RequestBody Book book) {
+    // bookService.returnABook(book);
+    // }
+
+    /**
+     * 批量借书
      */
-    @PutMapping("/{book_id}")
-    public void updateBook(@RequestBody Book book) {
-        bookService.borrowABook(book);
-    }
 
     /*
      * TEST
