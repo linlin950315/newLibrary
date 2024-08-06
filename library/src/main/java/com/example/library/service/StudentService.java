@@ -10,5 +10,6 @@ public interface StudentService {
     List<Student> insertStudent(StudentDTO studentDTO);
 
     // Read by ID
-    Student getLentListById();
+    List<Student> getLendListById(int student_id);
+
 }

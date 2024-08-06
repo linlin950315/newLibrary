@@ -1,7 +1,10 @@
 package com.example.library.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,9 +36,9 @@ public class StudentController {
      * R get lend List
      */
     @GetMapping("/{student_id}")
-    public Result<Student> getById(int student_id) {
-        Student studentInfo = studentService.getLentListById(int student_id);
-        return Result.success(studentInfo);
+    public Result<List<Student>> getById(@PathVariable("student_id") int student_id) {
+        List<Student> studentInfo1 = studentService.getLendListById(student_id);
+        return Result.success(studentInfo1);
     }
 
 }

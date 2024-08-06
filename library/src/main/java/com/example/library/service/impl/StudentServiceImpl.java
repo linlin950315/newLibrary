@@ -26,15 +26,15 @@ public class StudentServiceImpl implements StudentService {
         return null;
     }
 
-    @Override
-
     // Read by ID
-
-    public Student getLentListById(int student_id) {
-        Student studentInfo = studentMapper.getrentListById(student_id);
-        System.out.println("----------name-----------" + studentInfo);
+    @Override
+    public List<Student> getLendListById(int student_id) {
+        List<Student> studentInfo = studentMapper.getRentListById(student_id);
+        System.out.println("----------name1-----------" + studentInfo);
+        studentInfo.forEach(str -> {
+            System.out.println("----------name2-----------" + str);
+        });
         return studentInfo;
-
     }
 
 }

@@ -1,5 +1,7 @@
 package com.example.library.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -18,6 +20,5 @@ public interface StudentMapper {
     void addStudent(Student student);
 
     @Select("SELECT * FROM lend l LEFT JOIN book b ON l.bookId = b.book_id WHERE l.studentId = #{studentId}")
-    Student getRentListById(int student_id);
-
+    List<Student> getRentListById(int student_id);
 }
