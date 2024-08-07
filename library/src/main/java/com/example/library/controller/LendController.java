@@ -26,7 +26,7 @@ public class LendController {
      */
     @PutMapping("/addLend")
     public Result<String> lendAbook(@RequestParam int book_id, @RequestParam int student_id) {
-        lendService.addlend(book_id, student_id);
+        lendService.lendAbook(book_id, student_id);
         return Result.success();
     }
 

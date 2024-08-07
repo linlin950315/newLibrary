@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.library.pojo.dto.StudentDTO;
 import com.example.library.pojo.entity.Student;
 import com.example.library.service.StudentService;
-import com.example.library.util.Result;
 
 import io.swagger.annotations.Api;
 
@@ -34,11 +33,12 @@ public class StudentController {
 
     /**
      * R get lend List
+     * http://localhost:8080/admin/student/1
      */
     @GetMapping("/{student_id}")
-    public Result<List<Student>> getById(@PathVariable("student_id") int student_id) {
+    public List<Student> getLendListById(@PathVariable("student_id") int student_id) {
         List<Student> studentInfo1 = studentService.getLendListById(student_id);
-        return Result.success(studentInfo1);
+        return studentInfo1;
     }
 
 }

@@ -7,19 +7,19 @@ import com.example.library.pojo.entity.Book;
 
 public interface BookService {
     // C
-    void insertBook(BookDTO bookDTO);
+    void insert(BookDTO bookDTO);
 
     // D
-    void deleteBook(int book_id);
+    void deleteById(int book_id);
 
     // R
-    List<Book> getBookList();
+    List<Book> readAll();
 
     // Read by ID
-    Book getBookById(int book_id);
+    Book checkLendListById(int book_id);
 
     // U
-    void updateBook(BookDTO bookDTO);
+    void updateBookInfo(BookDTO bookDTO);
 
     // // Update 借书 数量-1
     // void borrowABook(Book book);

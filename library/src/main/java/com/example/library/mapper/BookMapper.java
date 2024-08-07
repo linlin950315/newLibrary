@@ -26,7 +26,7 @@ public interface BookMapper {
          * D
          */
         @Delete("delete from book where book_id = #{book_id}")
-        void delete(@Param("book_id") int book_id);
+        void deleteById(@Param("book_id") int book_id);
 
         /**
          * R
@@ -40,7 +40,7 @@ public interface BookMapper {
          * @return
          */
         @Select("select * from book where book_id = #{book_id}")
-        Book getById(int book_id);
+        Book checkLendListById(int book_id);
 
         /**
          * U
@@ -52,7 +52,7 @@ public interface BookMapper {
                         + "</set>"
                         + "WHERE book_id = #{book_id}"
                         + "</script>")
-        void update(Book book); // debug这行不走 但注掉，就启动不起来
+        void updateBookInfo(Book book); // debug这行不走 但注掉，就启动不起来
 
         // Update 借书 数量-1
         // @Update("update book set counts = counts - 1 where book_id = #{book_id}")

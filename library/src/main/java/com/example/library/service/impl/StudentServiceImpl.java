@@ -22,18 +22,15 @@ public class StudentServiceImpl implements StudentService {
     public List<Student> insertStudent(StudentDTO studentDTO) {
         Student student = new Student();
         BeanUtils.copyProperties(studentDTO, student);
-        studentMapper.addStudent(student);
+        studentMapper.insertStudent(student);
         return null;
     }
 
     // Read by ID
     @Override
     public List<Student> getLendListById(int student_id) {
-        List<Student> studentInfo = studentMapper.getRentListById(student_id);
-        System.out.println("----------name1-----------" + studentInfo);
-        studentInfo.forEach(str -> {
-            System.out.println("----------name2-----------" + str);
-        });
+        List<Student> studentInfo = studentMapper.getLendListById(student_id);
+        System.out.println("----------借书数量-----------" + studentInfo.size());
         return studentInfo;
     }
 

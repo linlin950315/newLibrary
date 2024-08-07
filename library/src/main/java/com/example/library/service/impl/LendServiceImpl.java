@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.library.mapper.BookMapper;
 import com.example.library.mapper.LendMapper;
+import com.example.library.mapper.StudentMapper;
 import com.example.library.pojo.entity.Book;
 import com.example.library.pojo.entity.Lend;
 import com.example.library.service.LendService;
@@ -17,6 +18,8 @@ public class LendServiceImpl implements LendService {
     private BookMapper bookMapper;
     @Autowired
     private LendMapper lendMapper;
+    @Autowired
+    private StudentMapper studentMapper;
 
     // TODO 先判断是否可借书
     // 获取图书id的集合
@@ -25,18 +28,14 @@ public class LendServiceImpl implements LendService {
     // 更变书的数量
     // 将该图书ID、读者编号插入到数据库中的借书表中
     @Override
-    public void addlend(int book_id, int student_id) {
-
-        Book book = bookMapper.getById(book_id);// select * from book where book_id = #{book_id}
+    public void lendAbook(int book_id, int student_id) {
+        Book targetBook = bookMapper.checkLendListById(book_id);// select * from book where book_id = #{book_id}
         // TODO不能借重复的书
-        if (book.getBook_id().equals(studentMakpper.getBookIdByStudentId(student_id))) {
-            System.out.println("------------The book has already been borrowed out.--------------");
-            // return;
-
+        if (targetBook.getBook_id() == bookMapper.checkLendListById(book_id).getBook_id()) {
+            System.out.println("------------不能借重复的书--------------");
         }
-        if (book.getCounts() == 0) {
-            System.out.println("------------The book has already been borrowed out.--------------");
-            // return;
+        if (targetBook.getCounts() == 0) {
+            System.out.println("------------The book has already been borrowedout.--------------");
         } else {
             Lend lend = new Lend();
             lend.setStudentId(student_id);
@@ -44,7 +43,7 @@ public class LendServiceImpl implements LendService {
             // 书数量-1
             bookMapper.decrementBookCount(book_id);
             // 记录借书数据
-            lendMapper.createLoan(lend);
+            lendMapper.lendAbook(lend);
 
         }
     }

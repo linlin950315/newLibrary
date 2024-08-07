@@ -20,38 +20,38 @@ public class BookServiceImpl implements BookService {
 
     // C
     @Override
-    public void insertBook(BookDTO bookDTO) {
+    public void insert(BookDTO bookDTO) {
         Book book = new Book();
         BeanUtils.copyProperties(bookDTO, book);
         bookMapper.insert(book);
     }
 
     // D
-    public void deleteBook(int book_id) {
+    public void deleteById(int book_id) {
         System.out.println("Deleting book with id:" + book_id);
         System.out.println("------");
-        bookMapper.delete(book_id);
+        bookMapper.deleteById(book_id);
     }
 
     // R
-    public List<Book> getBookList() {
+    public List<Book> readAll() {
         bookMapper.readAll();
         return bookMapper.readAll();
     }
 
     // Read by ID
-    public Book getBookById(int book_id) {
-        Book bookInfo = bookMapper.getById(book_id);
+    public Book checkLendListById(int book_id) {
+        Book bookInfo = bookMapper.checkLendListById(book_id);
         System.out.println("----------name-----------" + bookInfo);
         return bookInfo;
     }
 
     // U
-    public void updateBook(BookDTO bookDTO) {
+    public void updateBookInfo(BookDTO bookDTO) {
         Book book = new Book();
         BeanUtils.copyProperties(bookDTO, book);
         System.out.println("BookServiceImpl: ------------Calling bookMapper.update(book)-----------");
-        bookMapper.update(book);
+        bookMapper.updateBookInfo(book);
     }
 
     // U counts-1

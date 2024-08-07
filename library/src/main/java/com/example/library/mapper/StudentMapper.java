@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
 
 import com.example.library.pojo.entity.Student;
 
@@ -17,8 +16,10 @@ public interface StudentMapper {
             +
             "values" +
             "(#{student_id},#{student_name})")
-    void addStudent(Student student);
+    void insertStudent(Student student);
 
-    @Select("SELECT * FROM lend l LEFT JOIN book b ON l.bookId = b.book_id WHERE l.studentId = #{studentId}")
-    List<Student> getRentListById(int student_id);
+    // Read by ID
+    // @Select("SELECT * FROM lend l LEFT JOIN book b ON l.bookId = b.book_id WHERE
+    // l.studentId = #{studentId}")
+    List<Student> getLendListById(int student_id);
 }

@@ -9,5 +9,5 @@ import com.example.library.pojo.entity.Lend;
 public interface LendMapper {
 
     @Insert("INSERT INTO lend (bookId, studentId) VALUES (#{bookId}, #{studentId})")
-    void createLoan(Lend lend);
+    void lendAbook(Lend lend);
 }
