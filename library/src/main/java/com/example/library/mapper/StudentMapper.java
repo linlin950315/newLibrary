@@ -18,8 +18,7 @@ public interface StudentMapper {
             "(#{student_id},#{student_name})")
     void insertStudent(Student student);
 
-    // Read by ID
-    // @Select("SELECT * FROM lend l LEFT JOIN book b ON l.bookId = b.book_id WHERE
-    // l.studentId = #{studentId}")
+    // Read by ID @Select("SELECT * FROM lend l LEFT JOIN book b ON l.bookId =
+    // b.book_id WHERE l.studentId = #{studentId}")
     List<Student> getLendListById(int student_id);
 }

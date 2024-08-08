@@ -26,7 +26,7 @@ public class BookDTO implements Serializable {
     private String description;
 
     // 总数量
-    private int counts;
+    private Integer counts;
 
     // 0 不可租 1 可租
     private Integer status;

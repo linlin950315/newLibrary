@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.library.pojo.entity.Lend;
 import com.example.library.service.LendService;
 import com.example.library.util.Result;
 
@@ -25,9 +26,9 @@ public class LendController {
      * *
      */
     @PutMapping("/addLend")
-    public Result<String> lendAbook(@RequestParam int book_id, @RequestParam int student_id) {
-        lendService.lendAbook(book_id, student_id);
-        return Result.success();
+    public Result<Lend> lendAbook(@RequestParam int book_id, @RequestParam int student_id) {
+        return lendService.lendAbook(book_id, student_id);
+        // return Result.success();
     }
 
     /**

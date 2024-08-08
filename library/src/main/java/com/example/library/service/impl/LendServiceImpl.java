@@ -6,10 +6,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.library.mapper.BookMapper;
 import com.example.library.mapper.LendMapper;
-import com.example.library.mapper.StudentMapper;
 import com.example.library.pojo.entity.Book;
 import com.example.library.pojo.entity.Lend;
 import com.example.library.service.LendService;
+import com.example.library.util.Result;
 
 @Service
 @Transactional
@@ -18,24 +18,19 @@ public class LendServiceImpl implements LendService {
     private BookMapper bookMapper;
     @Autowired
     private LendMapper lendMapper;
-    @Autowired
-    private StudentMapper studentMapper;
 
-    // TODO 先判断是否可借书
-    // 获取图书id的集合
-
-    // 可借书
-    // 更变书的数量
-    // 将该图书ID、读者编号插入到数据库中的借书表中
     @Override
-    public void lendAbook(int book_id, int student_id) {
-        Book targetBook = bookMapper.checkLendListById(book_id);// select * from book where book_id = #{book_id}
-        // TODO不能借重复的书
-        if (targetBook.getBook_id() == bookMapper.checkLendListById(book_id).getBook_id()) {
+    public Result<Lend> lendAbook(int book_id, int student_id) {
+        // 查输入的studentId和bookId是否在数据库中
+        int targetCount = lendMapper.searchHistory(book_id, student_id);
+        if (targetCount > 0) {
             System.out.println("------------不能借重复的书--------------");
+            return Result.error("不能借重复的书");// ok
         }
+
+        Book targetBook = bookMapper.checkLendListById(book_id); // ("select * from book where book_id = #{book_id}")
         if (targetBook.getCounts() == 0) {
-            System.out.println("------------The book has already been borrowedout.--------------");
+            return Result.error("已借完"); // ok
         } else {
             Lend lend = new Lend();
             lend.setStudentId(student_id);
@@ -44,7 +39,9 @@ public class LendServiceImpl implements LendService {
             bookMapper.decrementBookCount(book_id);
             // 记录借书数据
             lendMapper.lendAbook(lend);
-
+            return Result.success();// ok
         }
+
     }
+
 }
