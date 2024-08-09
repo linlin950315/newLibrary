@@ -30,7 +30,6 @@ public class BookController {
      * C
      */
     @PostMapping()
-
     public void insert(@RequestBody BookDTO bookDTO) { // 注解@RequestBody用于接收前端传递给后端的、JSON对象的字符串
         bookService.insert(bookDTO);
 

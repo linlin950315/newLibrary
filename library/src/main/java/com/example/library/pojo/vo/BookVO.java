@@ -1,4 +1,4 @@
-package com.example.library.pojo.entity;
+package com.example.library.pojo.vo;
 
 import java.io.Serializable;
 import java.math.BigDecimal;

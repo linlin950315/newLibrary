@@ -4,8 +4,10 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 
 import com.example.library.pojo.entity.Student;
+import com.example.library.pojo.vo.StudentVO;
 
 @Mapper
 public interface StudentMapper {
@@ -21,4 +23,8 @@ public interface StudentMapper {
     // Read by ID @Select("SELECT * FROM lend l LEFT JOIN book b ON l.bookId =
     // b.book_id WHERE l.studentId = #{studentId}")
     List<Student> getLendListById(int student_id);
+
+    // get student by ID
+    @Select("SELECT * FROM student WHERE student_id = #{student_id}")
+    List<StudentVO> getStudentById(int student_id);
 }
