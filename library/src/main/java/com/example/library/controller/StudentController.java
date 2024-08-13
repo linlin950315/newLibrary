@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.library.exception.ApiRequestException;
 import com.example.library.pojo.dto.StudentDTO;
 import com.example.library.pojo.entity.Student;
 import com.example.library.pojo.vo.StudentVO;
@@ -28,7 +29,7 @@ public class StudentController {
      * C
      */
     @PostMapping()
-    public void insertStudent(@RequestBody StudentDTO studentDTO) { // 注解@RequestBody用于接收前端传递给后端的、JSON对象的字符串
+    public void insertAStudent(@RequestBody StudentDTO studentDTO) { // 注解@RequestBody用于接收前端传递给后端的、JSON对象的字符串
         studentService.insertStudent(studentDTO);
     }
 
@@ -49,8 +50,9 @@ public class StudentController {
      */
     @GetMapping("/search/{student_id}")
     public List<StudentVO> getStudentById(@PathVariable("student_id") int student_id) {
-        List<StudentVO> studentInfo2 = studentService.getStudentById(student_id);
-        return studentInfo2;
+        throw new ApiRequestException("-------cannot get student with custom exception----");
+        // throw new IllegalStateException("--------cannot get student--------");
+        // List<StudentVO> studentInfo2 = studentService.getStudentById(student_id);
+        // return studentInfo2;
     }
-
 }

@@ -34,7 +34,6 @@ public class LendController {
     /**
      * 查询借书信息
      * select
-     *
      * from
      * lend l
      * book b ON l.bookId = b.book_id
