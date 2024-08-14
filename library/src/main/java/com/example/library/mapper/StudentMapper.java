@@ -7,7 +7,6 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import com.example.library.pojo.entity.Student;
-import com.example.library.pojo.vo.StudentVO;
 
 @Mapper
 public interface StudentMapper {
@@ -26,5 +25,5 @@ public interface StudentMapper {
 
     // get student by ID
     @Select("SELECT * FROM student WHERE student_id = #{student_id}")
-    List<StudentVO> getStudentById(int student_id);
+    Student getStudentById(int student_id);
 }

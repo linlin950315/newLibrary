@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.example.library.pojo.dto.StudentDTO;
 import com.example.library.pojo.entity.Student;
-import com.example.library.pojo.vo.StudentVO;
+import com.example.library.util.Result;
 
 public interface StudentService {
     // C
@@ -14,6 +14,6 @@ public interface StudentService {
     List<Student> getLendListById(int student_id);
 
     // get student by ID
-    List<StudentVO> getStudentById(int student_id);
+    Result<Student> getStudentById(int student_id);
 
 }

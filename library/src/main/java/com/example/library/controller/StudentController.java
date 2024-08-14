@@ -10,11 +10,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.library.exception.ApiRequestException;
 import com.example.library.pojo.dto.StudentDTO;
 import com.example.library.pojo.entity.Student;
-import com.example.library.pojo.vo.StudentVO;
 import com.example.library.service.StudentService;
+import com.example.library.util.Result;
 
 import io.swagger.annotations.Api;
 
@@ -49,10 +48,12 @@ public class StudentController {
      * http://localhost:8080/admin/student/search/6
      */
     @GetMapping("/search/{student_id}")
-    public List<StudentVO> getStudentById(@PathVariable("student_id") int student_id) {
-        throw new ApiRequestException("-------cannot get student with custom exception----");
+    public Result<Student> getStudentById(@PathVariable("student_id") int student_id) {
+        // throw new ApiRequestException("-------cannot get student with custom
+        // exception----");
         // throw new IllegalStateException("--------cannot get student--------");
-        // List<StudentVO> studentInfo2 = studentService.getStudentById(student_id);
-        // return studentInfo2;
+        Result<Student> studentInfo2 = studentService.getStudentById(student_id);
+        return studentInfo2;
     }
+
 }
