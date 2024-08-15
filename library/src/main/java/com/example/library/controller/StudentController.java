@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.library.pojo.dto.StudentDTO;
+import com.example.library.pojo.entity.Lend;
 import com.example.library.pojo.entity.Student;
 import com.example.library.service.StudentService;
 import com.example.library.util.Result;
@@ -37,8 +38,8 @@ public class StudentController {
      * http://localhost:8080/admin/student/1
      */
     @GetMapping("/{student_id}")
-    public List<Student> getLendListById(@PathVariable("student_id") int student_id) {
-        List<Student> studentInfo1 = studentService.getLendListById(student_id);
+    public List<Lend> getLendListById(@PathVariable("student_id") int student_id) {
+        List<Lend> studentInfo1 = studentService.getLendListById(student_id);
         return studentInfo1;
     }
 

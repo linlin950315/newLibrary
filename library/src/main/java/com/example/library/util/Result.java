@@ -36,4 +36,9 @@ public class Result<T> implements Serializable {
         return result;
     }
 
+    public String size() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'size'");
+    }
+
 }

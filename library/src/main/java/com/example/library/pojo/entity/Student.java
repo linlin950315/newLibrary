@@ -31,4 +31,9 @@ public class Student implements Serializable {
     private LocalDateTime createTime;
 
     private LocalDateTime updateTime;
+
+    public String size() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'size'");
+    }
 }

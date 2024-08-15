@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.library.exception.ApiRequestException;
 import com.example.library.mapper.StudentMapper;
 import com.example.library.pojo.dto.StudentDTO;
+import com.example.library.pojo.entity.Lend;
 import com.example.library.pojo.entity.Student;
 import com.example.library.service.StudentService;
 import com.example.library.util.Result;
@@ -31,8 +32,8 @@ public class StudentServiceImpl implements StudentService {
 
     // Read by ID
     @Override
-    public List<Student> getLendListById(int student_id) {
-        List<Student> studentInfo = studentMapper.getLendListById(student_id);
+    public List<Lend> getLendListById(int student_id) {
+        List<Lend> studentInfo = studentMapper.getLendListById(student_id);
         System.out.println("----------借书数量-----------" + studentInfo.size());
         return studentInfo;
     }
