@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.library.pojo.dto.StudentDTO;
-import com.example.library.pojo.entity.Lend;
+import com.example.library.pojo.entity.Book;
 import com.example.library.pojo.entity.Student;
 import com.example.library.service.StudentService;
 import com.example.library.util.Result;
@@ -35,20 +35,20 @@ public class StudentController {
 
     /**
      * R get lend List
-     * http://localhost:8080/admin/student/1
+     * http://localhost:8080/admin/student/get-lend-list/1
      */
-    @GetMapping("/{student_id}")
-    public List<Lend> getLendListById(@PathVariable("student_id") int student_id) {
-        List<Lend> studentInfo1 = studentService.getLendListById(student_id);
+    @GetMapping("/get-lend-list/{student_id}")
+    public List<Book> getLendListById(@PathVariable("student_id") int student_id) {
+        List<Book> studentInfo1 = studentService.getLendListById(student_id);
+
         return studentInfo1;
     }
 
     /**
-     * R
-     * get student by ID
-     * http://localhost:8080/admin/student/search/6
+     * R get student by ID
+     * http://localhost:8080/admin/student/6
      */
-    @GetMapping("/search/{student_id}")
+    @GetMapping("/{student_id}")
     public Result<Student> getStudentById(@PathVariable("student_id") int student_id) {
         // throw new ApiRequestException("-------cannot get student with custom
         // exception----");
@@ -57,4 +57,11 @@ public class StudentController {
         return studentInfo2;
     }
 
+    /**
+     * Read all student
+     */
+    @GetMapping()
+    public List<Student> readAllstudent() {
+        return studentService.readAllstudent();
+    }
 }

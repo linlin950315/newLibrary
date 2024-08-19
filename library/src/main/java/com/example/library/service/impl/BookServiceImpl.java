@@ -35,7 +35,6 @@ public class BookServiceImpl implements BookService {
 
     // R
     public List<Book> readAll() {
-        bookMapper.readAll();
         return bookMapper.readAll();
     }
 

@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.library.exception.ApiRequestException;
 import com.example.library.mapper.StudentMapper;
 import com.example.library.pojo.dto.StudentDTO;
-import com.example.library.pojo.entity.Lend;
+import com.example.library.pojo.entity.Book;
 import com.example.library.pojo.entity.Student;
 import com.example.library.service.StudentService;
 import com.example.library.util.Result;
@@ -30,11 +30,16 @@ public class StudentServiceImpl implements StudentService {
         return null;
     }
 
-    // Read by ID
+    // R get student by ID
     @Override
-    public List<Lend> getLendListById(int student_id) {
-        List<Lend> studentInfo = studentMapper.getLendListById(student_id);
-        System.out.println("----------借书数量-----------" + studentInfo.size());
+    public List<Book> getLendListById(int student_id) {
+        // test if student is already
+        if (studentMapper.getStudentById(student_id) == null) {
+            throw new ApiRequestException("student_id is not exist");
+        }
+
+        List<Book> studentInfo = studentMapper.getLendListById(student_id);
+        System.out.println("----------借书数量-----------" + studentInfo);
         return studentInfo;
     }
 
@@ -46,12 +51,17 @@ public class StudentServiceImpl implements StudentService {
             throw new ApiRequestException("student_id < 0 is not allowed");
         }
 
-        // if (studentInfo3.size() == 0) {
-        // throw new ApiRequestException("Student with ID " + student_id + " is not
-        // found.");
+        // if (studentInfo3 == null) {
+        // return Result.error("------null-----");
         // }
 
         return Result.success(studentInfo3);
+    }
+
+    // R read all
+    public List<Student> readAllstudent() {
+        return studentMapper.readAllstudent();
+
     }
 
 }

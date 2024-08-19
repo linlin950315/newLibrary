@@ -1,5 +1,7 @@
 package com.example.library.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,12 +49,12 @@ public class BookController {
      * Read ALL
      */
     @GetMapping()
-    public void readAll() {
-        bookService.readAll();
+    public List<Book> readAll() {
+        return bookService.readAll();
     }
 
     /*
-     * Read by ID
+     * Read by I
      */
     @GetMapping("/{book_id}")
     public Result<Book> checkLendListById(@PathVariable int book_id) {

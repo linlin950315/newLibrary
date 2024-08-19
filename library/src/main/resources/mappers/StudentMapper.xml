@@ -6,9 +6,9 @@
         SELECT
             *
         FROM
-            lend l
+        book b
         LEFT JOIN
-            book b
+        lend l
         ON
             l.bookId = b.book_id
         <where>
