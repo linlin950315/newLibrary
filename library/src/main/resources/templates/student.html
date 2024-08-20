@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lend List</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #fetchButton {
+            margin-top: 10px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Lend List for Student</h1>
+
+    <input type="number" id="studentId" placeholder="Enter Student ID" min="1">
+    <button id="fetchButton">Get Lend List</button>
+
+    <ul id="lendList"></ul>
+    <h2>RESULT</h2>
+    <table>
+        <thead>
+          <tr>
+            <th>student name</th>
+            <th>student id</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td id="name"></td>
+            <td id="id"></td>
+          </tr>
+        </tbody>
+      </table>
+
+
+
+
+    <script>
+        $(document).ready(function() {
+            $('#fetchButton').click(function() {
+                var studentId = $('#studentId').val();
+                if (studentId) {
+                    $.ajax({
+                        url: 'http://localhost:8080/admin/student/' + studentId,
+                        method: 'GET',
+                        dataType: 'json',
+                        success: function(response) {
+                            var lendList = $('#lendList');
+                            lendList.empty();
+                         console.log(response);
+                         document.getElementById('id').innerHTML=response.data.student_id;
+                         document.getElementById('name').innerHTML=response.data.student_name;
+                        },
+                        error: function() {
+                            alert('Failed to fetch the lend list.');
+                        }
+                    });
+                } else {
+                    alert('Please enter a valid Student ID.');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

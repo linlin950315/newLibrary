@@ -23,11 +23,13 @@ public class StudentServiceImpl implements StudentService {
 
     // Create
     @Override
-    public List<Student> insertStudent(StudentDTO studentDTO) {
+    public Student insertStudent(StudentDTO studentDTO) {
         Student student = new Student();
         BeanUtils.copyProperties(studentDTO, student);
         studentMapper.insertStudent(student);
-        return null;
+        // return List.of(student);
+        return student;
+
     }
 
     // R get student by ID

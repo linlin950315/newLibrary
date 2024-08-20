@@ -7,7 +7,7 @@ import com.example.library.pojo.entity.Book;
 
 public interface BookService {
     // C
-    void insert(BookDTO bookDTO);
+    Book insert(BookDTO bookDTO);
 
     // D
     void deleteById(int book_id);

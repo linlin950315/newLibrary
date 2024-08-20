@@ -3,6 +3,7 @@ package com.example.library.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,8 +30,9 @@ public class StudentController {
      * C
      */
     @PostMapping()
-    public void insertAStudent(@RequestBody StudentDTO studentDTO) { // 注解@RequestBody用于接收前端传递给后端的、JSON对象的字符串
-        studentService.insertStudent(studentDTO);
+    public int insertAStudent(@RequestBody StudentDTO studentDTO) { // 注解@RequestBody用于接收前端传递给后端的、JSON对象的字符串
+        Student newStudent = studentService.insertStudent(studentDTO);
+        return newStudent.getStudent_id();
     }
 
     /**
@@ -40,21 +42,20 @@ public class StudentController {
     @GetMapping("/get-lend-list/{student_id}")
     public List<Book> getLendListById(@PathVariable("student_id") int student_id) {
         List<Book> studentInfo1 = studentService.getLendListById(student_id);
-
         return studentInfo1;
     }
 
     /**
      * R get student by ID
-     * http://localhost:8080/admin/student/6
+     * http://localhost:8080/admin/student/1
      */
     @GetMapping("/{student_id}")
-    public Result<Student> getStudentById(@PathVariable("student_id") int student_id) {
+    public Result<Student> getStudentById(@PathVariable("student_id") int student_id, Model model) {
         // throw new ApiRequestException("-------cannot get student with custom
         // exception----");
         // throw new IllegalStateException("--------cannot get student--------");
-        Result<Student> studentInfo2 = studentService.getStudentById(student_id);
-        return studentInfo2;
+        Result<Student> studentInfo = studentService.getStudentById(student_id);
+        return studentInfo;
     }
 
     /**

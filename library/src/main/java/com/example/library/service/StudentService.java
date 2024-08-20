@@ -9,7 +9,7 @@ import com.example.library.util.Result;
 
 public interface StudentService {
     // C
-    List<Student> insertStudent(StudentDTO studentDTO);
+    Student insertStudent(StudentDTO studentDTO);
 
     // R get lend List
     List<Book> getLendListById(int student_id);

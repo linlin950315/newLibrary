@@ -34,7 +34,7 @@ public class Book implements Serializable {
     // 描述信息
     private String description;
     // 总数量
-    private int counts;
+    private Integer counts;
 
     // 0 已出租 1 可租
     private Integer status;
