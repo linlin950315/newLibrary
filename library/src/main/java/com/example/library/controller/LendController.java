@@ -13,7 +13,7 @@ import com.example.library.util.Result;
 import io.swagger.annotations.Api;
 
 @RestController
-@RequestMapping("/admin/lend")
+@RequestMapping("/user/lend")
 @Api(tags = "--------------LEND--------------")
 public class LendController {
 
@@ -22,7 +22,7 @@ public class LendController {
 
     /**
      * 借书
-     * http://localhost:8080/admin/lend/addLend?book_id=4&student_id=1
+     * http://localhost:8080/user/lend/addLend?book_id=4&student_id=1
      * *
      */
     @PutMapping("/addLend")

@@ -10,8 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.library.exception.ApiRequestException;
 import com.example.library.mapper.StudentMapper;
 import com.example.library.pojo.dto.StudentDTO;
-import com.example.library.pojo.entity.Book;
 import com.example.library.pojo.entity.Student;
+import com.example.library.pojo.vo.LendVO;
 import com.example.library.service.StudentService;
 import com.example.library.util.Result;
 
@@ -32,20 +32,20 @@ public class StudentServiceImpl implements StudentService {
 
     }
 
-    // R get student by ID
+    // R1 get lend List
     @Override
-    public List<Book> getLendListById(int student_id) {
+    public List<LendVO> getLendListById(int student_id) {
         // test if student is already
         if (studentMapper.getStudentById(student_id) == null) {
             throw new ApiRequestException("student_id is not exist");
         }
 
-        List<Book> studentInfo = studentMapper.getLendListById(student_id);
-        System.out.println("----------借书数量-----------" + studentInfo);
+        List<LendVO> studentInfo = studentMapper.getLendListById(student_id);
+        // System.out.println("----------借书数量-----------" + studentInfo);
         return studentInfo;
     }
 
-    // get student by ID
+    // R2 get student by ID
     public Result<Student> getStudentById(int student_id) {
         Student studentInfo3 = studentMapper.getStudentById(student_id); // "SELECT * FROM student WHERE
                                                                          // student_id = #{student_id}"

@@ -6,11 +6,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class View {
     /**
-     * R get student by ID
-     * http://localhost:8080/viewstudent
+     * admin 管理员页面 根据id 查姓名和正在借的书
+     * http://localhost:8080/admin
      */
-    @GetMapping("/viewstudent")
-    public String greet() {
-        return "student";
+    @GetMapping("/admin")
+    public String adminpage() {
+        return "admin";
     }
+
+    /**
+     * user 用户页面 学生进行借书操作
+     * http://localhost:8080/user
+     */
+    @GetMapping("/user")
+    public String user() {
+        return "user";
+    }
+
 }

@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.library.mapper.StudentMapper">
-     
+
     <select id="getLendListById">
-        SELECT
-            *
-        FROM
-        book b
-        LEFT JOIN
-        lend l
-        ON
-            l.bookId = b.book_id
+        SELECT * FROM lend l LEFT JOIN book b on l.bookId = b.book_id 
+        left join student s on s.student_id = l.studentId
         <where>
             l.studentId = #{studentId}
         </where>

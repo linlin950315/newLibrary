@@ -6,8 +6,8 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
-import com.example.library.pojo.entity.Book;
 import com.example.library.pojo.entity.Student;
+import com.example.library.pojo.vo.LendVO;
 
 @Mapper
 public interface StudentMapper {
@@ -21,10 +21,11 @@ public interface StudentMapper {
     void insertStudent(Student student);
 
     /**
-     * R get student by ID @Select("SELECT * FROM lend l LEFT JOIN book b ON
+     * R1 get lend List
+     * @Select("SELECT * FROM lend l LEFT JOIN book b ON
      * l.bookId = b.book_id WHERE l.studentId = #{studentId}")
      */
-    List<Book> getLendListById(int student_id);
+    List<LendVO> getLendListById(int student_id); // TODO 换其他的entity来收数据
 
     // get student by ID
     @Select("SELECT * FROM student WHERE student_id = #{student_id}")

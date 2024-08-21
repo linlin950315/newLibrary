@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lend a book</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        #fetchButton {
+            margin-top: 10px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>用户页面 学生进行借书操作 h1</h1>
+
+    <input type="number" id="studentId" placeholder="Enter Student ID" min="1">
+    <span>请输入你的id</span>
+
+    <input type="number" id="bookId" placeholder="Enter Book ID" min="1">
+    <span>请输入书id</span>
+
+    <button id="lendButton">Lend Book</button>
+    <div id="result"></div>
+
+    <script>
+        $(document).ready(function () {
+            console.log('jQuery loaded');
+            $('#lendButton').click(function () {
+                debugger
+                // 从输入框获取值
+                var student_id = $('#studentId').val();
+                var book_id = $('#bookId').val();
+                // 确保变量有值
+                console.log('book_id:', bookId, 'student_id:', studentId);
+                
+                if (book_id && student_id) {
+                    $.ajax({
+                        url: 'http://localhost:8080/user/lend/addLend?book_id=' + document.getElementById('bookId').value + '&student_id=' + document.getElementById('studentId').value,
+                        method: 'PUT',
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            book_id: bookId,
+                            student_id: studentId
+                        }),
+                        success: function (response) {
+                            if (response.code === 1) {
+                                $('#result').text('Book lent successfully!');
+                            } else {
+                                $('#result').text('Failed to lend book: ' + (response.msg || 'Unknown error.'));
+                            }
+                        },
+                        error: function () {
+                            $('#result').text('Failed to send request.');
+                        }
+                    });
+                } else {
+                    alert('Please enter both Book ID and Student ID.');
+                }
+            });
+        });
+    </script>
+    
+</body>
+
+</html>

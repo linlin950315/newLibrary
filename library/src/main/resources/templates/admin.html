@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lend List</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        #fetchButton {
+            margin-top: 10px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>管理员页面 根据id 查姓名和正在借的书 h1</h1>
+
+    <input type="number" id="studentId" placeholder="Enter Student ID" min="1">
+    <button id="fetchButton">Get Lend List</button>
+    <ul id="lendList"></ul>
+
+    <h2>RESULT</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>book name</th>
+                <th>student name</th>
+            </tr>
+        </thead>
+        <tbody id="tbody">
+            <!-- <tr>
+            <td id="book name"></td>
+            <td id="student name"></td>
+          </tr> -->
+        </tbody>
+    </table>
+
+
+
+
+    <script>
+        $(document).ready(function () {
+            $('#fetchButton').click(function () {
+                var studentId = $('#studentId').val();
+                if (studentId) {
+                    $.ajax({
+                        url: 'http://localhost:8080/admin/student/getlendlist/' + studentId,
+                        method: 'GET',
+                        dataType: 'json',
+                        success: function (response) {
+                            var lendList = $('#lendList');
+                            lendList.empty();
+                            console.log(response);
+                            //  document.getElementById('book name').innerHTML=response[0].book_name;
+                            //  document.getElementById('student name').innerHTML=response[0].student_name;
+                            
+                            // 清空之前的搜索结果
+                            document.getElementById('tbody').innerHTML = '';
+
+                             // 将新数据插入表格
+                            response.forEach(item => {
+                                let tr = document.createElement('tr');
+                                tr.innerHTML = `<td>${item.book_name}</td><td>${item.student_name}</td>`;
+                                document.getElementById('tbody').appendChild(tr);
+                            })
+
+                        },
+                        error: function () {
+                            alert('Failed to fetch the lend list.');
+                        }
+                    });
+                } else {
+                    alert('Please enter a valid Student ID.');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

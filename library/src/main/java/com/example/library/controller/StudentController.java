@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.library.pojo.dto.StudentDTO;
-import com.example.library.pojo.entity.Book;
 import com.example.library.pojo.entity.Student;
+import com.example.library.pojo.vo.LendVO;
 import com.example.library.service.StudentService;
 import com.example.library.util.Result;
 
@@ -36,17 +36,20 @@ public class StudentController {
     }
 
     /**
-     * R get lend List
-     * http://localhost:8080/admin/student/get-lend-list/1
+     * R1 get lend List
+     * http://localhost:8080/admin/student/getlendlist/1
      */
-    @GetMapping("/get-lend-list/{student_id}")
-    public List<Book> getLendListById(@PathVariable("student_id") int student_id) {
-        List<Book> studentInfo1 = studentService.getLendListById(student_id);
+    @GetMapping("/getlendlist/{student_id}")
+    public List<LendVO> getLendListById(@PathVariable("student_id") int student_id) { // SELECT * FROM lend l LEFT JOIN
+                                                                                      // book b ON l.bookId = b.book_id
+                                                                                      // WHERE l.studentId =
+                                                                                      // #{studentId}"
+        List<LendVO> studentInfo1 = studentService.getLendListById(student_id);
         return studentInfo1;
     }
 
     /**
-     * R get student by ID
+     * R2 get student by ID
      * http://localhost:8080/admin/student/1
      */
     @GetMapping("/{student_id}")
@@ -59,7 +62,7 @@ public class StudentController {
     }
 
     /**
-     * Read all student
+     * R3 read all student
      */
     @GetMapping()
     public List<Student> readAllstudent() {
