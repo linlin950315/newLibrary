@@ -9,6 +9,8 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import com.example.library.annotation.AutoFill;
+import com.example.library.enumeration.OperationType;
 import com.example.library.pojo.entity.Book;
 
 @Mapper
@@ -16,10 +18,11 @@ public interface BookMapper {
         /**
          * C
          */
-        @Insert("insert into book(book_id,book_name,counts)"
+        @Insert("insert into book(book_id,book_name,counts,createTime,updateTime)"
                         +
                         "values" +
-                        "(#{book_id},#{book_name},#{counts})")
+                        "(#{book_id},#{book_name},#{counts},#{createTime},#{updateTime})")
+        @AutoFill(value = OperationType.INSERT)
         void insert(Book book);
 
         /**
