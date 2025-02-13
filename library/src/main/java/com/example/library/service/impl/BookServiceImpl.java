@@ -28,6 +28,7 @@ public class BookServiceImpl implements BookService {
     }
 
     // D
+    @Override
     public void deleteById(int book_id) {
         System.out.println("Deleting book with id:" + book_id);
         System.out.println("------");
@@ -35,11 +36,13 @@ public class BookServiceImpl implements BookService {
     }
 
     // R
+    @Override
     public List<Book> readAll() {
         return bookMapper.readAll();
     }
 
     // Read by ID
+    @Override
     public Book checkLendListById(int book_id) {
         Book bookInfo = bookMapper.checkLendListById(book_id);
         System.out.println("----------name-----------" + bookInfo);
@@ -47,10 +50,12 @@ public class BookServiceImpl implements BookService {
     }
 
     // U
+    @Override
     public void updateBookInfo(BookDTO bookDTO) {
         Book book = new Book();
         BeanUtils.copyProperties(bookDTO, book);
         System.out.println("BookServiceImpl: ------------Calling bookMapper.update(book)-----------");
+        System.out.println("Updating book: " + book);
         bookMapper.updateBookInfo(book);
     }
 

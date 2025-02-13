@@ -48,13 +48,21 @@ public interface BookMapper {
         /**
          * U
          */
-        @Update("<script>"
-                        + "UPDATE Book "
-                        + "<set>"
-                        + "<if test='book_name != null'> book_name = #{book_name}, </if>"
-                        + "</set>"
-                        + "WHERE book_id = #{book_id}"
-                        + "</script>")
+        // @Update("<script>" 脚本形式也ok，但加条件容易报错
+        // + "UPDATE Book "
+        // + "<set>"
+        // + "<if test='book_name != null'> book_name = #{book_name}, </if>"
+
+        // + "</set>"
+        // + "WHERE book_id = #{book_id}"
+        // + "</script>")
+        @Update("UPDATE Book SET "
+                        + "book_name = #{book_name}, "
+                        + "counts = #{counts}, "
+                        + "categoryId = #{categoryId}, "
+                        + "price = #{price}, "
+                        + "`description` = #{description} " // `description`是 MySQL 的保留关键字，所以加上反引号：`description`
+                        + "WHERE book_id = #{book_id}")
         void updateBookInfo(Book book); // debug这行不走 但注掉，就启动不起来
 
         // Update 借书 数量-1
