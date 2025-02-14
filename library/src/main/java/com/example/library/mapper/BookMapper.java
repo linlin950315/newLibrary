@@ -18,10 +18,10 @@ public interface BookMapper {
         /**
          * C
          */
-        @Insert("insert into book(book_id,book_name,counts,createTime,updateTime)"
+        @Insert("insert into book(book_name,counts,categoryId,price,description,status) "
                         +
                         "values" +
-                        "(#{book_id},#{book_name},#{counts},#{createTime},#{updateTime})")
+                        "(#{book_name},#{counts},#{categoryId},#{price},#{description},#{status})")
         @AutoFill(value = OperationType.INSERT)
         void insert(Book book);
 
