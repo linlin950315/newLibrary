@@ -1,6 +1,6 @@
 package com.example.library.service;
 
-import java.util.List;
+import org.springframework.data.domain.Page;
 
 import com.example.library.pojo.dto.BookDTO;
 import com.example.library.pojo.entity.Book;
@@ -13,7 +13,7 @@ public interface BookService {
     void deleteById(int book_id);
 
     // R
-    List<Book> readAll();
+    Page<Book> readAll(int page, int size);
 
     // Read by ID
     Book checkLendListById(int book_id);

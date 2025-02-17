@@ -1,8 +1,7 @@
 package com.example.library.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.library.pojo.dto.BookDTO;
 import com.example.library.pojo.entity.Book;
 import com.example.library.pojo.entity.Student;
+import com.example.library.repository.BookRepository;
 import com.example.library.service.BookService;
 import com.example.library.util.Result;
 
@@ -27,6 +27,8 @@ import io.swagger.annotations.Api;
 public class BookController {
     @Autowired
     private BookService bookService;
+    private BookRepository bookRepository;
+
 
     /*
      * C
@@ -40,19 +42,27 @@ public class BookController {
     /*
      * D
      */
+    // 根据book_id删除书籍
     @DeleteMapping("/{book_id}")
     public void deleteById(@PathVariable int book_id) {
+        // 调用bookService的deleteById方法，根据book_id删除书籍
         bookService.deleteById(book_id);
     }
 
     /*
      * Read ALL
      */
-    @GetMapping()
-    public List<Book> readAll() {
-        return bookService.readAll();
+    // @GetMapping()
+    // public List<Book> readAll() {
+    //     return bookService.readAll();
+    // }
+     @GetMapping() //http://localhost:8080/admin/book?page=0&size=5
+    public Page<Book>  getBooks(@RequestParam(defaultValue = "0") int page,
+    @RequestParam(defaultValue = "5") int size) {
+     return bookService.readAll(page, size);
     }
-
+    
+    
     /*
      * Read by I
      */

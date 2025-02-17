@@ -1,15 +1,17 @@
 package com.example.library.service.impl;
 
-import java.util.List;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.library.mapper.BookMapper;
 import com.example.library.pojo.dto.BookDTO;
 import com.example.library.pojo.entity.Book;
+import com.example.library.repository.BookRepository;
 import com.example.library.service.BookService;
 
 @Service
@@ -17,6 +19,8 @@ import com.example.library.service.BookService;
 public class BookServiceImpl implements BookService {
     @Autowired
     private BookMapper bookMapper;
+        @Autowired
+    private BookRepository bookRepository;
 
     // C
     @Override
@@ -37,8 +41,9 @@ public class BookServiceImpl implements BookService {
 
     // R
     @Override
-    public List<Book> readAll() {
-        return bookMapper.readAll();
+    public Page<Book> readAll(int page, int size) {
+         Pageable pageable = PageRequest.of(page, size);
+        return bookRepository.findAll(pageable);
     }
 
     // Read by ID
