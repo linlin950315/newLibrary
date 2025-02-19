@@ -23,7 +23,7 @@ public class BookVO implements Serializable {
     private String book_name;
 
     // 分类id
-    private Long categoryId;
+    private Long category_id;
 
     // 价格
     private BigDecimal price;

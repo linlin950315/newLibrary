@@ -24,7 +24,7 @@ public class LendVO implements Serializable {
 
     private String book_name;
 
-    private Long categoryId;
+    private Long category_id;
 
     private String image;
 
