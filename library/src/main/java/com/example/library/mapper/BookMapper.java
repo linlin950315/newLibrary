@@ -18,10 +18,10 @@ public interface BookMapper {
         /**
          * C
          */
-        @Insert("insert into book(book_name,counts,categoryId,price,description,status) "
+        @Insert("insert into book(book_name,counts,category_id,price,description,status) "
                         +
                         "values" +
-                        "(#{book_name},#{counts},#{categoryId},#{price},#{description},#{status})")
+                        "(#{book_name},#{counts},#{category_id},#{price},#{description},#{status})")
         @AutoFill(value = OperationType.INSERT)
         void insert(Book book);
 
@@ -59,7 +59,7 @@ public interface BookMapper {
         @Update("UPDATE Book SET "
                         + "book_name = #{book_name}, "
                         + "counts = #{counts}, "
-                        + "categoryId = #{categoryId}, "
+                        + "category_id = #{category_id}, "
                         + "price = #{price}, "
                         + "`description` = #{description} " // `description`是 MySQL 的保留关键字，所以加上反引号：`description`
                         + "WHERE book_id = #{book_id}")
