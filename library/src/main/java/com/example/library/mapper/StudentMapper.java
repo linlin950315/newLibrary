@@ -27,7 +27,7 @@ public interface StudentMapper {
      */
     List<LendVO> getLendListById(int student_id); // TODO 换其他的entity来收数据
 
-    // get student by ID
+    // get student by ID .xml file
     @Select("SELECT * FROM student WHERE student_id = #{student_id}")
     Student getStudentById(int student_id);
 

@@ -25,6 +25,9 @@ public interface BookMapper {
         @AutoFill(value = OperationType.INSERT)
         void insert(Book book);
 
+          // batch  .xml file
+        int insertBookBatch(@Param("list") List<Book> books); 
+          
         /**
          * D
          */

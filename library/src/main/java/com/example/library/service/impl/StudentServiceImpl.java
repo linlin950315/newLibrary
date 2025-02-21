@@ -39,7 +39,6 @@ public class StudentServiceImpl implements StudentService {
         if (studentMapper.getStudentById(student_id) == null) {
             throw new ApiRequestException("student_id is not exist");
         }
-
         List<LendVO> studentInfo = studentMapper.getLendListById(student_id);
         // System.out.println("----------借书数量-----------" + studentInfo);
         return studentInfo;

@@ -1,5 +1,8 @@
 package com.example.library.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,9 +20,10 @@ import com.example.library.service.BookService;
 @Service
 @Transactional
 public class BookServiceImpl implements BookService {
+
     @Autowired
     private BookMapper bookMapper;
-        @Autowired
+    @Autowired
     private BookRepository bookRepository;
 
     // C
@@ -29,6 +33,17 @@ public class BookServiceImpl implements BookService {
         BeanUtils.copyProperties(bookDTO, newbook);
         bookMapper.insert(newbook);
         return newbook;
+    }
+
+    @Override
+    public int insertBookBatch(List<BookDTO> bookDTOList) {
+        List<Book> books = new ArrayList<>();
+        for (BookDTO bookDTO : bookDTOList) {
+            Book book = new Book();
+            BeanUtils.copyProperties(bookDTO, book);
+            books.add(book);  // 加入到books集合中
+        }
+        return bookMapper.insertBookBatch(books);
     }
 
     // D
@@ -42,7 +57,7 @@ public class BookServiceImpl implements BookService {
     // R
     @Override
     public Page<Book> readAll(int page, int size) {
-         Pageable pageable = PageRequest.of(page, size);
+        Pageable pageable = PageRequest.of(page, size);
         return bookRepository.findAll(pageable);
     }
 
@@ -85,11 +100,8 @@ public class BookServiceImpl implements BookService {
     // // 再次更新counts
     // bookMapper.update(book);
     // System.out.println("Borrow successfully.");
-
     // }
-
     // // U counts+1
     // public void returnABook(Book book) {
-
     // }
 }

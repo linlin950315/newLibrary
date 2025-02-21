@@ -1,5 +1,7 @@
 package com.example.library.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -38,6 +40,13 @@ public class BookController {
         Book book1 = bookService.insert(bookDTO);
         return book1.getBook_id();
     }
+
+    @PostMapping("/insertBatch")
+    public Result<Integer> insertBookBatch(@RequestBody List<BookDTO> bookDTO) {
+        int rows = bookService.insertBookBatch(bookDTO);
+        return Result.success(rows);
+        }
+
 
     /*
      * D

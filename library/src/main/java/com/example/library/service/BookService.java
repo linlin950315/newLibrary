@@ -1,5 +1,7 @@
 package com.example.library.service;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 
 import com.example.library.pojo.dto.BookDTO;
@@ -8,6 +10,8 @@ import com.example.library.pojo.entity.Book;
 public interface BookService {
     // C
     Book insert(BookDTO bookDTO);
+    
+    int insertBookBatch(List<BookDTO> bookDTO);
 
     // D
     void deleteById(int book_id);
@@ -20,6 +24,7 @@ public interface BookService {
 
     // U
     void updateBookInfo(BookDTO bookDTO);
+
 
     // // Update 借书 数量-1
     // void borrowABook(Book book);
