@@ -33,7 +33,7 @@ public class BookController {
 
 
     /*
-     * C
+     * C //TODO 对category扩展，category表；每个cayegory_id对应duoge book_id，一个string
      */
     @PostMapping("/insert")
     public int insert(@RequestBody BookDTO bookDTO) { // 注解@RequestBody用于接收前端传递给后端的、JSON对象的字符串

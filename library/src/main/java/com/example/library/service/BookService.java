@@ -18,6 +18,8 @@ public interface BookService {
 
     // R
     Page<Book> readAll(int page, int size);
+    // Read by Category
+    //List<Book> readAllByCategory(String categoryId);
 
     // Read by ID
     Book checkLendListById(int book_id);
