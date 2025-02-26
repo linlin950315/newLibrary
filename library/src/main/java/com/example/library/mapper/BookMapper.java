@@ -21,7 +21,7 @@ public interface BookMapper {
         @Insert("insert into book(book_name,counts,category_id,price,description,status) "
                         +
                         "values" +
-                        "(#{book_name},#{counts},#{category_id},#{price},#{description},#{status})")
+                        "(#{book_name},#{counts},#{category.categoryId},#{price},#{description},#{status})")
         @AutoFill(value = OperationType.INSERT)
         void insert(Book book);
 
@@ -46,7 +46,7 @@ public interface BookMapper {
          * @return
          */
         @Select("select * from book where book_id = #{book_id}")
-        Book checkLendListById(int book_id);
+        Book getBookById(int book_id);
 
         /**
          * U
@@ -62,12 +62,12 @@ public interface BookMapper {
         @Update("UPDATE Book SET "
                         + "book_name = #{book_name}, "
                         + "counts = #{counts}, "
-                        + "category_id = #{category_id}, "
+                        + "category_id = #{category.categoryId}, "//TODO: 这里需要处理 category_id 的赋值 新加一个表就要动这个？
                         + "price = #{price}, "
+                        + "status = #{status}, "
                         + "`description` = #{description} " // `description`是 MySQL 的保留关键字，所以加上反引号：`description`
                         + "WHERE book_id = #{book_id}")
-        void updateBookInfo(Book book); // debug这行不走 但注掉，就启动不起来
-
+        void updateBookInfo(Book book);
         // Update 借书 数量-1
         // @Update("update book set counts = counts - 1 where book_id = #{book_id}")
         // void borrowA(Book book2);

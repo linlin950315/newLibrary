@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,6 +32,8 @@ public class BookServiceImpl implements BookService {
     public Book insert(BookDTO bookDTO) {
         Book newbook = new Book();
         BeanUtils.copyProperties(bookDTO, newbook);
+        System.out.println("BookServiceImpl: ------------Calling bookMapper.update(book)-----------");
+        System.out.println("Inserting book:" + newbook);
         bookMapper.insert(newbook);
         return newbook;
     }
@@ -48,6 +51,7 @@ public class BookServiceImpl implements BookService {
 
     // D
     @Override
+    
     public void deleteById(int book_id) {
         System.out.println("Deleting book with id:" + book_id);
         System.out.println("------");
@@ -60,13 +64,22 @@ public class BookServiceImpl implements BookService {
         Pageable pageable = PageRequest.of(page, size);
         return bookRepository.findAll(pageable);
     }
-
-    // Read by ID
     @Override
-    public Book checkLendListById(int book_id) {
-        Book bookInfo = bookMapper.checkLendListById(book_id);
-        System.out.println("----------name-----------" + bookInfo);
-        return bookInfo;
+    public Book findByBookId(int bookId) {
+        return bookRepository.findByBookId(bookId).orElse(null);
+    }
+
+    //Read by Category
+    @Override
+    public List<Book> findByCategoryId(Long categoryId) {
+        return bookRepository.findAllByCategory_CategoryId(categoryId);
+    }
+    // Read bookname by ID
+    @Override
+    public <Result>Book getBookById(@Param("bookId") int book_id) {
+             Book bookInfo = bookMapper.getBookById(book_id);
+             System.out.println("----------name-----------" + bookInfo);
+             return bookInfo;
     }
 
     // U
@@ -78,6 +91,8 @@ public class BookServiceImpl implements BookService {
         System.out.println("Updating book: " + book);
         bookMapper.updateBookInfo(book);
     }
+
+    
 
     // U counts-1
     // public void borrowABook(Book book) {

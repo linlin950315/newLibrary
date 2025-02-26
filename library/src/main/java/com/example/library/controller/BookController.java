@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.library.pojo.dto.BookDTO;
 import com.example.library.pojo.entity.Book;
 import com.example.library.pojo.entity.Student;
-import com.example.library.repository.BookRepository;
 import com.example.library.service.BookService;
 import com.example.library.util.Result;
 
@@ -29,7 +28,6 @@ import io.swagger.annotations.Api;
 public class BookController {
     @Autowired
     private BookService bookService;
-    private BookRepository bookRepository;
 
 
     /*
@@ -37,11 +35,12 @@ public class BookController {
      */
     @PostMapping("/insert")
     public int insert(@RequestBody BookDTO bookDTO) { // 注解@RequestBody用于接收前端传递给后端的、JSON对象的字符串
+        System.out.println("@RequestBodybookDTO: "  + bookDTO);
         Book book1 = bookService.insert(bookDTO);
         return book1.getBook_id();
     }
 
-    @PostMapping("/insertBatch")
+    @PostMapping("/insertBatch")//TODO 加category
     public Result<Integer> insertBookBatch(@RequestBody List<BookDTO> bookDTO) {
         int rows = bookService.insertBookBatch(bookDTO);
         return Result.success(rows);
@@ -70,16 +69,21 @@ public class BookController {
     @RequestParam(defaultValue = "5") int size) {
      return bookService.readAll(page, size);
     }
-    
-    
     /*
-     * Read by I
+     * Read by Id
      */
+    // @GetMapping("/{book_id}") //TODO 查不到category的json
+    // public Result<Book> getBookById(@PathVariable int book_id) {
+    //     Book bookInfo = bookService.getBookById(book_id);
+    //     return Result.success(bookInfo);
+    // }
     @GetMapping("/{book_id}")
-    public Result<Book> checkLendListById(@PathVariable int book_id) {
-        Book bookInfo = bookService.checkLendListById(book_id);
+    public Result<Book> getBookByIdJPA(@PathVariable int book_id) {
+        Book bookInfo = bookService.findByBookId(book_id);
         return Result.success(bookInfo);
     }
+
+
 
     /*
      * Update

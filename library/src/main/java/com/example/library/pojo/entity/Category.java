@@ -20,9 +20,7 @@ public class Category implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-        // 名称
-    private String categoryName;
-
-    //memoID
     private Long categoryId;
+
+    private String categoryName;
 }

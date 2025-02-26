@@ -19,10 +19,11 @@ public interface BookService {
     // R
     Page<Book> readAll(int page, int size);
     // Read by Category
-    //List<Book> readAllByCategory(String categoryId);
+    List<Book> findByCategoryId(Long categoryId);
 
     // Read by ID
-    Book checkLendListById(int book_id);
+    <Result>Book getBookById(int book_id);
+    Book findByBookId(int bookId);
 
     // U
     void updateBookInfo(BookDTO bookDTO);
