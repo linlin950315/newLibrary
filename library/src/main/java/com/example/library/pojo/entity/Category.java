@@ -16,10 +16,12 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor//无参构造函数
 @AllArgsConstructor//全参数构造函数
 @Entity//?
+
 public class Category implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+
     private Long categoryId;
 
     private String categoryName;
