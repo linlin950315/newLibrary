@@ -17,13 +17,13 @@ import lombok.experimental.SuperBuilder;
 public class BookVO implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private int book_id;
+    private int bookId;
 
     // 名称
     private String book_name;
 
     // 分类id
-    private Long category_id;
+    private Long categoryId;
 
     // 价格
     private BigDecimal price;

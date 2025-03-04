@@ -12,6 +12,7 @@ import org.apache.ibatis.annotations.Update;
 import com.example.library.annotation.AutoFill;
 import com.example.library.enumeration.OperationType;
 import com.example.library.pojo.entity.Book;
+import com.example.library.pojo.vo.BookVO;
 
 @Mapper
 public interface BookMapper {
@@ -62,12 +63,12 @@ public interface BookMapper {
         @Update("UPDATE Book SET "
                         + "book_name = #{book_name}, "
                         + "counts = #{counts}, "
-                        + "category_id = #{category.categoryId}, "//TODO: 这里需要处理 category_id 的赋值 新加一个表就要动这个？
+                        + "category_id = #{categoryId}, "//TODO: 这里需要处理 category_id 的赋值 新加一个表就要动这个？
                         + "price = #{price}, "
                         + "status = #{status}, "
                         + "`description` = #{description} " // `description`是 MySQL 的保留关键字，所以加上反引号：`description`
-                        + "WHERE book_id = #{book_id}")
-        void updateBookInfo(Book book);
+                        + "WHERE book_id = #{bookId}")
+        void updateBookInfo(BookVO bookvo);
         // Update 借书 数量-1
         // @Update("update book set counts = counts - 1 where book_id = #{book_id}")
         // void borrowA(Book book2);

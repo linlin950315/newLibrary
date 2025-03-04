@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.library.mapper.BookMapper;
 import com.example.library.pojo.dto.BookDTO;
 import com.example.library.pojo.entity.Book;
+import com.example.library.pojo.vo.BookVO;
 import com.example.library.repository.BookRepository;
 import com.example.library.service.BookService;
 
@@ -85,11 +86,11 @@ public class BookServiceImpl implements BookService {
     // U
     @Override
     public void updateBookInfo(BookDTO bookDTO) {
-        Book book = new Book();
-        BeanUtils.copyProperties(bookDTO, book);
+        BookVO bookvo = new BookVO();
+        BeanUtils.copyProperties(bookDTO, bookvo);
         System.out.println("BookServiceImpl: ------------Calling bookMapper.update(book)-----------");
-        System.out.println("Updating book: " + book);
-        bookMapper.updateBookInfo(book);
+        System.out.println("Updating bookvo: " + bookvo);
+        bookMapper.updateBookInfo(bookvo);
     }
 
     

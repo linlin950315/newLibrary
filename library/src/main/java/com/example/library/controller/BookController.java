@@ -90,6 +90,7 @@ public class BookController {
      */
     @PutMapping()
     public void updateBookInfo(@RequestBody BookDTO bookDTO) {
+        System.out.println("----------@RequestBodybookDTO:----- "  + bookDTO);
         bookService.updateBookInfo(bookDTO);
     }
 
