@@ -22,9 +22,9 @@ public interface BookMapper {
         @Insert("insert into book(book_name,counts,category_id,price,description,status) "
                         +
                         "values" +
-                        "(#{book_name},#{counts},#{category.categoryId},#{price},#{description},#{status})")
+                        "(#{book_name},#{counts},#{categoryId},#{price},#{description},#{status})")
         @AutoFill(value = OperationType.INSERT)
-        void insert(Book book);
+        void insert(BookVO newbook);
 
           // batch  .xml file
         int insertBookBatch(@Param("list") List<Book> books); 

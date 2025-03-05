@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.library.pojo.dto.BookDTO;
 import com.example.library.pojo.entity.Book;
 import com.example.library.pojo.entity.Student;
+import com.example.library.pojo.vo.BookVO;
 import com.example.library.service.BookService;
 import com.example.library.util.Result;
 
@@ -33,12 +34,12 @@ public class BookController {
     /*
      * C //TODO 对category扩展，category表；每个cayegory_id对应duoge book_id，一个string
      */
-    // @PostMapping("/insert")
-    // public int insert(@RequestBody BookDTO bookDTO) { // 注解@RequestBody用于接收前端传递给后端的、JSON对象的字符串
-    //     System.out.println("@RequestBodybookDTO: "  + bookDTO);
-    //     Book book1 = bookService.insert(bookDTO);
-    //     return book1.getBook_id();
-    // }
+    @PostMapping("/insert")
+    public int insert(@RequestBody BookDTO bookDTO) { // 注解@RequestBody用于接收前端传递给后端的、JSON对象的字符串
+        System.out.println("@RequestBodybookDTO: "  + bookDTO);
+        BookVO book1 = bookService.insert(bookDTO);
+        return book1.getBookId();
+    }
 
     @PostMapping("/insertBatch")//TODO 加category
     public Result<Integer> insertBookBatch(@RequestBody List<BookDTO> bookDTO) {

@@ -30,11 +30,11 @@ public class BookServiceImpl implements BookService {
 
     // C
     @Override
-    public Book insert(BookDTO bookDTO) {
-        Book newbook = new Book();
+    public BookVO insert(BookDTO bookDTO) {
+        BookVO newbook = new BookVO();
         BeanUtils.copyProperties(bookDTO, newbook);
-        System.out.println("BookServiceImpl: ------------Calling bookMapper.update(book)-----------");
-        System.out.println("Inserting book:" + newbook);
+        System.out.println("BookServiceImpl: ------------Calling bookMapper.insert(book)-----------");
+        System.out.println("Inserting BookVO.newbook:" + newbook);
         bookMapper.insert(newbook);
         return newbook;
     }

@@ -6,10 +6,11 @@ import org.springframework.data.domain.Page;
 
 import com.example.library.pojo.dto.BookDTO;
 import com.example.library.pojo.entity.Book;
+import com.example.library.pojo.vo.BookVO;
 
 public interface BookService {
     // C
-    Book insert(BookDTO bookDTO);
+    BookVO insert(BookDTO bookDTO);
     
     int insertBookBatch(List<BookDTO> bookDTO);
 
