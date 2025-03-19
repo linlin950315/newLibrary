@@ -30,8 +30,9 @@ public class Book implements Serializable {
     private int bookId;
 
     // 名称
-    private String book_name;
-    
+    @Column(name = "book_name") // 映射数据库的 book_id
+    //private String book_name;
+     private String bookName;
     // 分类id
     //private Long category_id;
 

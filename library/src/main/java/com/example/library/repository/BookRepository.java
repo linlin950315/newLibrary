@@ -14,8 +14,8 @@ import com.example.library.pojo.entity.Book;
 //provides implementations for findAll methods that support pagination.
 public interface BookRepository extends  JpaRepository<Book, Long> {
     Page<Book> findAll(Pageable pageable);
-
     // Spring Data JPA 方法命名规则 简化 Service 层逻辑
+
     List<Book> findAllByCategory_CategoryId(Long categoryId);
 
     Optional<Book> findByBookId(int bookId);

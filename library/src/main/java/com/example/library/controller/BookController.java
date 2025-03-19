@@ -47,7 +47,6 @@ public class BookController {
         return Result.success(rows);
         }
 
-
     /*
      * D
      */
@@ -69,6 +68,13 @@ public class BookController {
     public Page<Book>  getBooks(@RequestParam(defaultValue = "0") int page,
     @RequestParam(defaultValue = "5") int size) {
      return bookService.readAll(page, size);
+    }
+
+    @GetMapping("/sortBybookNameAsc")//http://localhost:8080/admin/book/sortBybookNameAsc?page=0&size=10&descOrAsc=desc
+    public Page<Book> sortBybookNameAsc(@RequestParam(defaultValue = "0") int page,
+    @RequestParam(defaultValue = "5") int size,@RequestParam(defaultValue = "bookName") String sortBy,
+    @RequestParam(defaultValue = "asc") String descOrAsc) {
+     return bookService.readAllsortBybookName(page, size, sortBy, descOrAsc);
     }
     /*
      * Read by Id

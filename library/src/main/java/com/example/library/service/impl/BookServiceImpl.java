@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -65,6 +66,24 @@ public class BookServiceImpl implements BookService {
         Pageable pageable = PageRequest.of(page, size);
         return bookRepository.findAll(pageable);
     }
+    @Override
+    // public Page<Book> readAllsortBybookNameAsc(int page, int size) {
+    //     // 创建分页对象，按 book_name 升序排序
+    //     Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.ASC, "book_name"));
+    //     return bookRepository.findAll(pageable);
+    // }
+    
+    public Page<Book> readAllsortBybookName(int page, int size, String sortBy, String descOrAsc) {
+        // 判断排序方向（默认升序）
+        Sort.Direction sortDirection = "desc".equalsIgnoreCase(descOrAsc) ? Sort.Direction.DESC : Sort.Direction.ASC;
+
+        // 创建分页对象
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sortDirection, sortBy));
+
+        // 查询数据并返回
+        return bookRepository.findAll(pageable);
+    }
+    
     @Override
     public Book findByBookId(int bookId) {
         return bookRepository.findByBookId(bookId).orElse(null);
