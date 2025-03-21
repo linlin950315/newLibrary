@@ -67,19 +67,11 @@ public class BookServiceImpl implements BookService {
         return bookRepository.findAll(pageable);
     }
     @Override
-    // public Page<Book> readAllsortBybookNameAsc(int page, int size) {
-    //     // 创建分页对象，按 book_name 升序排序
-    //     Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.ASC, "book_name"));
-    //     return bookRepository.findAll(pageable);
-    // }
-    
-    public Page<Book> readAllsortBybookName(int page, int size, String sortBy, String descOrAsc) {
+    public Page<Book> readAllsortBy(int page, int size, String sortBy, String descOrAsc) {
         // 判断排序方向（默认升序）
         Sort.Direction sortDirection = "desc".equalsIgnoreCase(descOrAsc) ? Sort.Direction.DESC : Sort.Direction.ASC;
-
         // 创建分页对象
         Pageable pageable = PageRequest.of(page, size, Sort.by(sortDirection, sortBy));
-
         // 查询数据并返回
         return bookRepository.findAll(pageable);
     }

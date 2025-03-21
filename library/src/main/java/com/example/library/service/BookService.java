@@ -22,7 +22,7 @@ public interface BookService {
 
    // 根据bookName升序排序，分页查询所有书籍
    //Page<Book> readAllsortBybookNameAsc(int page, int size);
-   Page<Book> readAllsortBybookName(int page, int size, String sortBy, String descOrAsc);
+   Page<Book> readAllsortBy(int page, int size, String sortBy, String descOrAsc);
     
    // Read by Category
     List<Book> findByCategoryId(Long categoryId);

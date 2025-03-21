@@ -70,11 +70,12 @@ public class BookController {
      return bookService.readAll(page, size);
     }
 
-    @GetMapping("/sortBybookNameAsc")//http://localhost:8080/admin/book/sortBybookNameAsc?page=0&size=10&descOrAsc=desc
-    public Page<Book> sortBybookNameAsc(@RequestParam(defaultValue = "0") int page,
+    @GetMapping("/sortBy")//http://localhost:8080/admin/book/sortBy?page=0&size=10&sortBy=bookName&descOrAsc=asc ,http://localhost:8080/admin/book/sortBy?page=0&size=10&sortBy=bookId&descOrAsc=asc
+    public Page<Book> readAllsortBy(@RequestParam(defaultValue = "0") int page,
     @RequestParam(defaultValue = "5") int size,@RequestParam(defaultValue = "bookName") String sortBy,
-    @RequestParam(defaultValue = "asc") String descOrAsc) {
-     return bookService.readAllsortBybookName(page, size, sortBy, descOrAsc);
+    @RequestParam() String descOrAsc) {//把(defaultValue = "asc")去掉检查 
+        System.out.println("sortBy Start------: "+ "page"+page +"//size"+ size + "//sortBy"+ sortBy +"//sort"+ descOrAsc);
+     return bookService.readAllsortBy(page, size, sortBy, descOrAsc);
     }
     /*
      * Read by Id
