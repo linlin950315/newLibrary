@@ -27,6 +27,7 @@ import io.swagger.annotations.Api;
 @RequestMapping("/admin/book")
 @Api(tags = "--------------BOOK--------------")
 public class BookController {
+
     @Autowired
     private BookService bookService;
 
@@ -36,7 +37,7 @@ public class BookController {
      */
     @PostMapping("/insert")
     public int insert(@RequestBody BookDTO bookDTO) { // 注解@RequestBody用于接收前端传递给后端的、JSON对象的字符串
-        System.out.println("@RequestBodybookDTO: "  + bookDTO);
+        System.out.println("@RequestBodybookDTO: " + bookDTO);
         BookVO book1 = bookService.insert(bookDTO);
         return book1.getBookId();
     }
@@ -45,7 +46,7 @@ public class BookController {
     public Result<Integer> insertBookBatch(@RequestBody List<BookDTO> bookDTO) {
         int rows = bookService.insertBookBatch(bookDTO);
         return Result.success(rows);
-        }
+    }
 
     /*
      * D
@@ -64,19 +65,20 @@ public class BookController {
     // public List<Book> readAll() {
     //     return bookService.readAll();
     // }
-     @GetMapping() //http://localhost:8080/admin/book?page=0&size=5
-    public Page<Book>  getBooks(@RequestParam(defaultValue = "0") int page,
-    @RequestParam(defaultValue = "5") int size) {
-     return bookService.readAll(page, size);
+    @GetMapping() //http://localhost:8080/admin/book?page=0&size=5
+    public Page<Book> getBooks(@RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size) {
+        return bookService.readAll(page, size);
     }
 
     @GetMapping("/sortBy")//http://localhost:8080/admin/book/sortBy?page=0&size=10&sortBy=bookName&descOrAsc=asc ,http://localhost:8080/admin/book/sortBy?page=0&size=10&sortBy=bookId&descOrAsc=asc
     public Page<Book> readAllsortBy(@RequestParam(defaultValue = "0") int page,
-    @RequestParam(defaultValue = "5") int size,@RequestParam(defaultValue = "bookName") String sortBy,
-    @RequestParam() String descOrAsc) {//把(defaultValue = "asc")去掉检查 
-        System.out.println("sortBy Start------: "+ "page"+page +"//size"+ size + "//sortBy"+ sortBy +"//sort"+ descOrAsc);
-     return bookService.readAllsortBy(page, size, sortBy, descOrAsc);
+            @RequestParam(defaultValue = "5") int size, @RequestParam(defaultValue = "bookName") String sortBy,
+            @RequestParam() String descOrAsc) {//把(defaultValue = "asc")去掉检查 
+        System.out.println("sortBy Start------: " + "page" + page + "//size" + size + "//sortBy" + sortBy + "//sort" + descOrAsc);
+        return bookService.readAllsortBy(page, size, sortBy, descOrAsc);
     }
+
     /*
      * Read by Id
      */
@@ -91,14 +93,22 @@ public class BookController {
         return Result.success(bookInfo);
     }
 
-
+    //search according to input (name)  http://localhost:8080/admin/book/search?keyword=a&page=0&size=10&sortBy=bookName&descOrAsc=DESC
+    // 根据关键词搜索书籍
+    @GetMapping("/search")
+    public Page<Book> searchBooks(@RequestParam String keyword,@RequestParam() int page,
+    @RequestParam() int size, @RequestParam() String sortBy,
+    @RequestParam() String descOrAsc) {
+        // 调用bookService的findByBookName方法，根据关键词搜索书籍
+        return bookService.findByBookName(keyword,page,size,sortBy,descOrAsc);
+    }
 
     /*
      * Update
      */
     @PutMapping()
     public void updateBookInfo(@RequestBody BookDTO bookDTO) {
-        System.out.println("----------@RequestBodybookDTO:----- "  + bookDTO);
+        System.out.println("----------@RequestBodybookDTO:----- " + bookDTO);
         bookService.updateBookInfo(bookDTO);
     }
 
@@ -109,7 +119,6 @@ public class BookController {
     // public void updateBook(@RequestBody Book book) {
     // bookService.borrowABook(book);
     // }
-
     // /**
     // * 还书 数量+1
     // */
@@ -117,7 +126,6 @@ public class BookController {
     // public void updateBookReturn(@RequestBody Book book) {
     // bookService.returnABook(book);
     // }
-
     /**
      * 批量借书
      */
@@ -157,13 +165,11 @@ public class BookController {
     // public String test3(@PathVariable int id2) {
     // return "http://localhost:8080/testput/123?" + id2;
     // }
-
     // "error": "Bad Request"
     // @PutMapping("/testput")
     // public String test3(@RequestParam String name) {
     // return "http://localhost:8080/testput/name=aaa?" + name;
     // }
-
     @DeleteMapping("/testdelete")
     public String testdelete() {
         return "@DeleteMapping(\"/testdelete\")";

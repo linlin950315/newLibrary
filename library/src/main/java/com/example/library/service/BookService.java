@@ -34,6 +34,9 @@ public interface BookService {
     // U
     void updateBookInfo(BookDTO bookDTO);
 
+   //search according to input
+   Page<Book> findByBookName(String keyword,int page, int size, String sortBy, String descOrAsc);
+
 
     // // Update 借书 数量-1
     // void borrowABook(Book book);

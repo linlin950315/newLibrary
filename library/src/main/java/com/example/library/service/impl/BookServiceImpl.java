@@ -75,6 +75,19 @@ public class BookServiceImpl implements BookService {
         // 查询数据并返回
         return bookRepository.findAll(pageable);
     }
+
+    //search according to input
+    @Override
+    public Page<Book> findByBookName(String keyword,int page, int size, String sortBy, String descOrAsc) {
+         // 判断排序方向（默认升序）
+         Sort.Direction sortDirection = "desc".equalsIgnoreCase(descOrAsc) ? Sort.Direction.DESC : Sort.Direction.ASC;
+         // 创建分页对象
+         Pageable pageable = PageRequest.of(page, size, Sort.by(sortDirection, sortBy));
+         // 查询数据并返回
+         return bookRepository.findAllByBookNameContaining(keyword, pageable);
+
+
+    }
     
     @Override
     public Book findByBookId(int bookId) {
@@ -103,6 +116,7 @@ public class BookServiceImpl implements BookService {
         System.out.println("Updating bookvo: " + bookvo);
         bookMapper.updateBookInfo(bookvo);
     }
+
 
     
 
