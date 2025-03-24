@@ -93,15 +93,26 @@ public class BookController {
         return Result.success(bookInfo);
     }
 
-    //search according to input (name)  http://localhost:8080/admin/book/search?keyword=a&page=0&size=10&sortBy=bookName&descOrAsc=DESC
-    // 根据关键词搜索书籍
+    //search according to input (name)  http://localhost:8080/admin/book/search?keyword=a&page=0&size=10&sortBy=bookName&descOrAsc=DESC&categoryId=88
+    // 根据bookname categoryId搜索书籍
     @GetMapping("/search")
     public Page<Book> searchBooks(@RequestParam String keyword,@RequestParam() int page,
     @RequestParam() int size, @RequestParam() String sortBy,
-    @RequestParam() String descOrAsc) {
+    @RequestParam() String descOrAsc,@RequestParam(required = false) Long categoryId) {
+        System.out.println("----------Controller:----- ");
         // 调用bookService的findByBookName方法，根据关键词搜索书籍
-        return bookService.findByBookName(keyword,page,size,sortBy,descOrAsc);
+        return bookService.findByBookNamAndCategoryId(keyword,page,size,sortBy,descOrAsc,categoryId);
     }
+
+     
+    // load and search 根据categoryId搜索书籍 http://localhost:8080/admin/book/search?keyword=a&page=0&size=10&sortBy=bookName&descOrAsc=DESC&categoryId=88
+    // @GetMapping("/searchFromCategoryIdOrName")
+    // public Page<Book> findAllByCategoryIdContaining(@RequestParam String keyword,@RequestParam() int page,
+    // @RequestParam() int size, @RequestParam() String sortBy,
+    // @RequestParam() String descOrAsc,@RequestParam() Long categoryId) {
+    //     // 调用bookService的findByBookName方法，根据关键词搜索书籍
+    //     return bookService.findAllByCategoryIdContaining(keyword,page,size,sortBy,descOrAsc,categoryId);
+    // }
 
     /*
      * Update

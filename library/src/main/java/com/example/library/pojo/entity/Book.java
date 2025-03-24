@@ -59,7 +59,7 @@ public class Book implements Serializable {
     private Long updateUser;
 
   @ManyToOne
-    @JoinColumn(name = "category_id", nullable = false)
+    @JoinColumn(name = "categoryId", nullable = false)
     private Category category;
 
 

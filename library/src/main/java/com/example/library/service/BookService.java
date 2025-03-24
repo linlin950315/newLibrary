@@ -25,7 +25,7 @@ public interface BookService {
    Page<Book> readAllsortBy(int page, int size, String sortBy, String descOrAsc);
     
    // Read by Category
-    List<Book> findByCategoryId(Long categoryId);
+    //List<Book> findByCategoryId(Long categoryId);
 
     // Read by ID
     <Result>Book getBookById(int book_id);
@@ -35,7 +35,10 @@ public interface BookService {
     void updateBookInfo(BookDTO bookDTO);
 
    //search according to input
-   Page<Book> findByBookName(String keyword,int page, int size, String sortBy, String descOrAsc);
+   Page<Book> findByBookNamAndCategoryId(String keyword,int page, int size, String sortBy, String descOrAsc,Long categoryId);
+ // 根据categoryId搜索书籍
+// Page<Book> findAllByCategoryIdContaining(String keyword, int page, int size, String sortBy, String descOrAsc,
+// Long categoryId);
 
 
     // // Update 借书 数量-1

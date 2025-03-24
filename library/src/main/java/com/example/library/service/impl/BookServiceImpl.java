@@ -78,16 +78,32 @@ public class BookServiceImpl implements BookService {
 
     //search according to input
     @Override
-    public Page<Book> findByBookName(String keyword,int page, int size, String sortBy, String descOrAsc) {
+    public Page<Book> findByBookNamAndCategoryId(String keyword,int page, int size, String sortBy, String descOrAsc,Long categoryId) {
          // 判断排序方向（默认升序）
          Sort.Direction sortDirection = "desc".equalsIgnoreCase(descOrAsc) ? Sort.Direction.DESC : Sort.Direction.ASC;
          // 创建分页对象
          Pageable pageable = PageRequest.of(page, size, Sort.by(sortDirection, sortBy));
-         // 查询数据并返回
-         return bookRepository.findAllByBookNameContaining(keyword, pageable);
 
-
+         if (categoryId == null) {
+            System.out.println("BookServiceImpl: Calling findAllByBookNameContaining-----------");
+            return bookRepository.findAllByBookNameContaining(keyword, pageable);
+         }else{
+            System.out.println("BookServiceImpl: Calling findAllByBookNameContainingAndCategory_CategoryId-----------");
+            return bookRepository.findAllByBookNameContainingAndCategory_CategoryId(keyword, pageable,categoryId);
+         }
+        
     }
+
+    // @Override
+    // public Page<Book> findAllByCategoryIdContaining(String keyword, int page, int size, String sortBy, String descOrAsc,
+    // Long categoryId){
+    //     // 判断排序方向（默认升序）
+    //     Sort.Direction sortDirection = "desc".equalsIgnoreCase(descOrAsc) ? Sort.Direction.DESC : Sort.Direction.ASC;
+    //     // 创建分页对象
+    //     Pageable pageable = PageRequest.of(page, size, Sort.by(sortDirection, sortBy));
+    //     // 查询数据并返回
+    //     return bookRepository.findAllByBookNameContainingAndCategory_CategoryId(keyword, pageable,categoryId);
+    // }
     
     @Override
     public Book findByBookId(int bookId) {
@@ -95,10 +111,10 @@ public class BookServiceImpl implements BookService {
     }
 
     //Read by Category
-    @Override
-    public List<Book> findByCategoryId(Long categoryId) {
-        return bookRepository.findAllByCategory_CategoryId(categoryId);
-    }
+    // @Override
+    // public List<Book> findByCategoryId(Long categoryId) {
+    //     return bookRepository.findAllByCategory_CategoryId(categoryId);
+    // }
     // Read bookname by ID
     @Override
     public <Result>Book getBookById(@Param("bookId") int book_id) {

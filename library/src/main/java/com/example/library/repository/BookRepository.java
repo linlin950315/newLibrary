@@ -1,5 +1,4 @@
 package com.example.library.repository;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
@@ -16,11 +15,13 @@ public interface BookRepository extends  JpaRepository<Book, Long> {
     Page<Book> findAll(Pageable pageable);
     // Spring Data JPA 方法命名规则 简化 Service 层逻辑
 
-    List<Book> findAllByCategory_CategoryId(Long categoryId);
+    //List<Book> findAllByCategory_CategoryId(Long categoryId);
 
     Optional<Book> findByBookId(int bookId);
 
     Page<Book> findAllByBookNameContaining(String keyword,Pageable pageable);
+
+    Page<Book>findAllByBookNameContainingAndCategory_CategoryId(String keyword,Pageable pageable,Long categoryId);
 
 
 
