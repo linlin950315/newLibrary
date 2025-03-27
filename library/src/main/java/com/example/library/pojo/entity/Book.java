@@ -3,6 +3,7 @@ package com.example.library.pojo.entity;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,6 +11,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -61,6 +64,15 @@ public class Book implements Serializable {
   @ManyToOne
     @JoinColumn(name = "categoryId", nullable = false)
     private Category category;
+
+    // 与 Author 的多对多关系
+    @ManyToMany
+    @JoinTable(
+        name = "book_author",
+        joinColumns = @JoinColumn(name = "book_id"),
+        inverseJoinColumns = @JoinColumn(name = "author_id")
+    )
+    private Set<Author> authors;
 
 
 }

@@ -6,6 +6,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 @SpringBootApplication
 @EnableAspectJAutoProxy
+//@EnableJpaRepositories("com.example.library.repository") // ✅ 指定 Repository 包路径
 // @MapperScan({ "com.example.library.mapper" })
 public class LibraryApplication {
 

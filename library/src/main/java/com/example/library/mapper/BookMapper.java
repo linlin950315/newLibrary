@@ -27,7 +27,7 @@ public interface BookMapper {
         void insert(BookVO newbook);
 
           // batch  .xml file
-        int insertBookBatch(@Param("list") List<Book> books); 
+        int insertBookBatch(@Param("list") List<Book> books);
           
         /**
          * D
