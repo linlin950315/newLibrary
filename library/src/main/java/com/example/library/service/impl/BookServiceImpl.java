@@ -1,6 +1,7 @@
 package com.example.library.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
@@ -15,8 +16,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.library.mapper.BookMapper;
 import com.example.library.pojo.dto.BookDTO;
+import com.example.library.pojo.entity.Author;
 import com.example.library.pojo.entity.Book;
 import com.example.library.pojo.vo.BookVO;
+import com.example.library.repository.AuthorRepository;
 import com.example.library.repository.BookRepository;
 import com.example.library.service.BookService;
 
@@ -28,6 +31,8 @@ public class BookServiceImpl implements BookService {
     private BookMapper bookMapper;
     @Autowired
     private BookRepository bookRepository;
+    @Autowired
+    private AuthorRepository authorRepository;
 
     // C
     @Override
@@ -53,7 +58,7 @@ public class BookServiceImpl implements BookService {
 
     // D
     @Override
-    
+
     public void deleteById(int book_id) {
         System.out.println("Deleting book with id:" + book_id);
         System.out.println("------");
@@ -66,6 +71,7 @@ public class BookServiceImpl implements BookService {
         Pageable pageable = PageRequest.of(page, size);
         return bookRepository.findAll(pageable);
     }
+
     @Override
     public Page<Book> readAllsortBy(int page, int size, String sortBy, String descOrAsc) {
         // 判断排序方向（默认升序）
@@ -78,20 +84,20 @@ public class BookServiceImpl implements BookService {
 
     //search according to input
     @Override
-    public Page<Book> findByBookNamAndCategoryId(String keyword,int page, int size, String sortBy, String descOrAsc,Long categoryId) {
-         // 判断排序方向（默认升序）
-         Sort.Direction sortDirection = "desc".equalsIgnoreCase(descOrAsc) ? Sort.Direction.DESC : Sort.Direction.ASC;
-         // 创建分页对象
-         Pageable pageable = PageRequest.of(page, size, Sort.by(sortDirection, sortBy));
+    public Page<Book> findByBookNamAndCategoryId(String keyword, int page, int size, String sortBy, String descOrAsc, Long categoryId) {
+        // 判断排序方向（默认升序）
+        Sort.Direction sortDirection = "desc".equalsIgnoreCase(descOrAsc) ? Sort.Direction.DESC : Sort.Direction.ASC;
+        // 创建分页对象
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sortDirection, sortBy));
 
-         if (categoryId == null) {
+        if (categoryId == null) {
             System.out.println("BookServiceImpl: Calling findAllByBookNameContaining-----------");
             return bookRepository.findAllByBookNameContaining(keyword, pageable);
-         }else{
+        } else {
             System.out.println("BookServiceImpl: Calling findAllByBookNameContainingAndCategory_CategoryId-----------");
-            return bookRepository.findAllByBookNameContainingAndCategory_CategoryId(keyword, pageable,categoryId);
-         }
-        
+            return bookRepository.findAllByBookNameContainingAndCategory_CategoryId(keyword, pageable, categoryId);
+        }
+
     }
 
     // @Override
@@ -104,10 +110,26 @@ public class BookServiceImpl implements BookService {
     //     // 查询数据并返回
     //     return bookRepository.findAllByBookNameContainingAndCategory_CategoryId(keyword, pageable,categoryId);
     // }
-    
     @Override
     public Book findByBookId(int bookId) {
         return bookRepository.findByBookId(bookId).orElse(null);
+    }
+
+    @Override
+    @Transactional
+    public void setAuthorsForBook(Long bookId, List<Long> authorIds) {
+        Book book = bookRepository.findById(bookId)
+                .orElseThrow(() -> new RuntimeException("书籍不存在"));
+        System.out.println("check book if exist: " + book);
+
+        List<Author> authors = authorRepository.findAllById(authorIds);
+        if (authors.isEmpty()) {
+            throw new RuntimeException("作者不存在");
+            //TODO增加作者
+        }
+        System.out.println("check authors if exist: " + authors);
+        book.setAuthors(new HashSet<>(authors));  // 设置多对多关联 作者一个已设好，另一个没设好的话就堆栈溢出
+        bookRepository.save(book);
     }
 
     //Read by Category
@@ -117,10 +139,10 @@ public class BookServiceImpl implements BookService {
     // }
     // Read bookname by ID
     @Override
-    public <Result>Book getBookById(@Param("bookId") int book_id) {
-             Book bookInfo = bookMapper.getBookById(book_id);
-             System.out.println("----------name-----------" + bookInfo);
-             return bookInfo;
+    public <Result> Book getBookById(@Param("bookId") int book_id) {
+        Book bookInfo = bookMapper.getBookById(book_id);
+        System.out.println("----------name-----------" + bookInfo);
+        return bookInfo;
     }
 
     // U
@@ -132,9 +154,6 @@ public class BookServiceImpl implements BookService {
         System.out.println("Updating bookvo: " + bookvo);
         bookMapper.updateBookInfo(bookvo);
     }
-
-
-    
 
     // U counts-1
     // public void borrowABook(Book book) {

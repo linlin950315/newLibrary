@@ -8,8 +8,9 @@ import org.springframework.stereotype.Repository;
 import com.example.library.pojo.entity.Author;
 
 @Repository
-public interface AuthorRepository extends JpaRepository<Author, Long>{
+public interface AuthorRepository extends JpaRepository<Author, Long> {
 // 根据作者名列表查询已存在的作者
-List<Author> findByAuthorNameIn(List<String> authorNames);
-   
+
+    List<Author> findByAuthorNameIn(List<String> authorNames);
+
 }

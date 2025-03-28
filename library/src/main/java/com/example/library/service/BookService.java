@@ -9,9 +9,10 @@ import com.example.library.pojo.entity.Book;
 import com.example.library.pojo.vo.BookVO;
 
 public interface BookService {
+
     // C
     BookVO insert(BookDTO bookDTO);
-    
+
     int insertBookBatch(List<BookDTO> bookDTO);
 
     // D
@@ -20,31 +21,28 @@ public interface BookService {
     // R
     Page<Book> readAll(int page, int size);
 
-   // 根据bookName升序排序，分页查询所有书籍
-   //Page<Book> readAllsortBybookNameAsc(int page, int size);
-   Page<Book> readAllsortBy(int page, int size, String sortBy, String descOrAsc);
-    
-   // Read by Category
-    //List<Book> findByCategoryId(Long categoryId);
+    // 根据bookName升序排序，分页查询所有书籍
+    //Page<Book> readAllsortBybookNameAsc(int page, int size);
+    Page<Book> readAllsortBy(int page, int size, String sortBy, String descOrAsc);
 
+    // Read by Category
+    //List<Book> findByCategoryId(Long categoryId);
     // Read by ID
-    <Result>Book getBookById(int book_id);
+    <Result> Book getBookById(int book_id);
+
     Book findByBookId(int bookId);
 
     // U
     void updateBookInfo(BookDTO bookDTO);
 
-   //search according to input
-   Page<Book> findByBookNamAndCategoryId(String keyword,int page, int size, String sortBy, String descOrAsc,Long categoryId);
- // 根据categoryId搜索书籍
-// Page<Book> findAllByCategoryIdContaining(String keyword, int page, int size, String sortBy, String descOrAsc,
-// Long categoryId);
+    //search according to input
+    Page<Book> findByBookNamAndCategoryId(String keyword, int page, int size, String sortBy, String descOrAsc, Long categoryId);
 
+    void setAuthorsForBook(Long authorId, List<Long> bookIds);
 
+    // 根据categoryId搜索书籍
     // // Update 借书 数量-1
     // void borrowABook(Book book);
-
     // // 还书 数量+1
     // void returnABook(Book book);
-
 }

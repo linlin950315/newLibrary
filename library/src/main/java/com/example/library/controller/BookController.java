@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.library.pojo.dto.BookAuthorDTO;
 import com.example.library.pojo.dto.BookDTO;
 import com.example.library.pojo.entity.Book;
 import com.example.library.pojo.entity.Student;
@@ -96,15 +97,14 @@ public class BookController {
     //search according to input (name)  http://localhost:8080/admin/book/search?keyword=a&page=0&size=10&sortBy=bookName&descOrAsc=DESC&categoryId=88
     // 根据bookname categoryId搜索书籍
     @GetMapping("/search")
-    public Page<Book> searchBooks(@RequestParam String keyword,@RequestParam() int page,
-    @RequestParam() int size, @RequestParam() String sortBy,
-    @RequestParam() String descOrAsc,@RequestParam(required = false) Long categoryId) {
+    public Page<Book> searchBooks(@RequestParam String keyword, @RequestParam() int page,
+            @RequestParam() int size, @RequestParam() String sortBy,
+            @RequestParam() String descOrAsc, @RequestParam(required = false) Long categoryId) {
         System.out.println("----------Controller:----- ");
         // 调用bookService的findByBookName方法，根据关键词搜索书籍
-        return bookService.findByBookNamAndCategoryId(keyword,page,size,sortBy,descOrAsc,categoryId);
+        return bookService.findByBookNamAndCategoryId(keyword, page, size, sortBy, descOrAsc, categoryId);
     }
 
-     
     // load and search 根据categoryId搜索书籍 http://localhost:8080/admin/book/search?keyword=a&page=0&size=10&sortBy=bookName&descOrAsc=DESC&categoryId=88
     // @GetMapping("/searchFromCategoryIdOrName")
     // public Page<Book> findAllByCategoryIdContaining(@RequestParam String keyword,@RequestParam() int page,
@@ -123,20 +123,33 @@ public class BookController {
         bookService.updateBookInfo(bookDTO);
     }
 
-    // /*
-    // * Update 借书 数量-1
-    // */
-    // @PutMapping("/{book_id}")
-    // public void updateBook(@RequestBody Book book) {
-    // bookService.borrowABook(book);
+    /*
+     *给书设置作者
+     */
+    @PostMapping("/setAuthors")
+    public Result<Void> setAuthorsForBook(@RequestBody BookAuthorDTO bookAuthordto) {
+        bookService.setAuthorsForBook(bookAuthordto.getAuthorId(), bookAuthordto.getBookIds());
+        return Result.success();
+    }
+    //    {
+    // "authorId": 103,
+    //  "bookIds": [10,11]
     // }
-    // /**
-    // * 还书 数量+1
-    // */
-    // // @PutMapping()
-    // public void updateBookReturn(@RequestBody Book book) {
-    // bookService.returnABook(book);
-    // }
+
+// /*
+// * Update 借书 数量-1
+// */
+// @PutMapping("/{book_id}")
+// public void updateBook(@RequestBody Book book) {
+// bookService.borrowABook(book);
+// }
+// /**
+// * 还书 数量+1
+// */
+// // @PutMapping()
+// public void updateBookReturn(@RequestBody Book book) {
+// bookService.returnABook(book);
+// }
     /**
      * 批量借书
      */
