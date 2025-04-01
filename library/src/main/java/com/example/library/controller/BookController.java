@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.library.pojo.dto.AuthorDTO;
 import com.example.library.pojo.dto.BookAuthorDTO;
 import com.example.library.pojo.dto.BookDTO;
 import com.example.library.pojo.entity.Book;
@@ -124,19 +125,34 @@ public class BookController {
     }
 
     /*
-     *给书设置作者
+     *给单本书设置作者
      */
     @PostMapping("/setAuthors")
     public Result<Void> setAuthorsForBook(@RequestBody BookAuthorDTO bookAuthordto) {
-        bookService.setAuthorsForBook(bookAuthordto.getAuthorId(), bookAuthordto.getBookIds());
+        bookService.setAuthorsForABook(bookAuthordto.getAuthorIds(), bookAuthordto.getBookId());
         return Result.success();
     }
-    //    {
-    // "authorId": 103,
-    //  "bookIds": [10,11]
-    // }
+    /*
+ *    {
+        "authorIds":[1,2,3],
+        "bookId": 103
+    }
+     */
 
-// /*
+ /*
+     *根据bookId查书的作者
+     */
+    @GetMapping("/getAuthorsByBookId/{bookId}")
+    public List<AuthorDTO> getAuthorsByBookId(@PathVariable Long bookId) {
+        return bookService.getAuthorsByBookId(bookId);
+    }
+
+    //期待值
+    /*
+ *    {
+[1,2,3]
+}
+     */
 // * Update 借书 数量-1
 // */
 // @PutMapping("/{book_id}")

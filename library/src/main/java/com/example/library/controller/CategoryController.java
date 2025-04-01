@@ -11,18 +11,20 @@ import com.example.library.pojo.entity.Category;
 import com.example.library.service.CategoryService;
 
 import io.swagger.annotations.Api;
+
 @RestController
 @RequestMapping("/categories")
 @Api(tags = "--------------Category--------------")
 public class CategoryController {
+
     @Autowired
     private CategoryService categoryService;
 //get all category
-@GetMapping("/all") //http://localhost:8080/categories/all
-public List<Category> getAll(){
-    List<Category> categories = categoryService.getAllCategory();
-    System.out.println("----------categories------------"+categories);
-return categoryService.getAllCategory();
 
-}
+    @GetMapping("/all") //http://localhost:8080/categories/all
+    public List<Category> getAll() {
+        List<Category> categories = categoryService.getAllCategory();
+        System.out.println("----------categories------------" + categories);
+        return categoryService.getAllCategory();
+    }
 }

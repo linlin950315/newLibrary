@@ -14,7 +14,9 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.library.mapper.BookAuthorMapper;
 import com.example.library.mapper.BookMapper;
+import com.example.library.pojo.dto.AuthorDTO;
 import com.example.library.pojo.dto.BookDTO;
 import com.example.library.pojo.entity.Author;
 import com.example.library.pojo.entity.Book;
@@ -33,6 +35,8 @@ public class BookServiceImpl implements BookService {
     private BookRepository bookRepository;
     @Autowired
     private AuthorRepository authorRepository;
+    @Autowired
+    private BookAuthorMapper bookAuthorMapper;
 
     // C
     @Override
@@ -92,7 +96,7 @@ public class BookServiceImpl implements BookService {
 
         if (categoryId == null) {
             System.out.println("BookServiceImpl: Calling findAllByBookNameContaining-----------");
-            return bookRepository.findAllByBookNameContaining(keyword, pageable);
+            return bookRepository.findAllByBookNameContaining(keyword, pageable);//TODO auther
         } else {
             System.out.println("BookServiceImpl: Calling findAllByBookNameContainingAndCategory_CategoryId-----------");
             return bookRepository.findAllByBookNameContainingAndCategory_CategoryId(keyword, pageable, categoryId);
@@ -117,7 +121,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     @Transactional
-    public void setAuthorsForBook(Long bookId, List<Long> authorIds) {
+    public void setAuthorsForABook(List<Long> authorIds, Long bookId) {
         Book book = bookRepository.findById(bookId)
                 .orElseThrow(() -> new RuntimeException("书籍不存在"));
         System.out.println("check book if exist: " + book);
@@ -125,11 +129,17 @@ public class BookServiceImpl implements BookService {
         List<Author> authors = authorRepository.findAllById(authorIds);
         if (authors.isEmpty()) {
             throw new RuntimeException("作者不存在");
-            //TODO增加作者
         }
         System.out.println("check authors if exist: " + authors);
         book.setAuthors(new HashSet<>(authors));  // 设置多对多关联 作者一个已设好，另一个没设好的话就堆栈溢出
         bookRepository.save(book);
+    }
+
+    @Override
+    public List<AuthorDTO> getAuthorsByBookId(Long bookId) {
+        List<AuthorDTO> authors = bookAuthorMapper.getAuthorNamesByBookId(bookId);
+        System.out.println("----bookAuthorDTO getAuthorID: " + authors);
+        return authors;
     }
 
     //Read by Category

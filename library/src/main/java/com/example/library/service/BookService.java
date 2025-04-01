@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 
+import com.example.library.pojo.dto.AuthorDTO;
 import com.example.library.pojo.dto.BookDTO;
 import com.example.library.pojo.entity.Book;
 import com.example.library.pojo.vo.BookVO;
@@ -38,7 +39,10 @@ public interface BookService {
     //search according to input
     Page<Book> findByBookNamAndCategoryId(String keyword, int page, int size, String sortBy, String descOrAsc, Long categoryId);
 
-    void setAuthorsForBook(Long authorId, List<Long> bookIds);
+    void setAuthorsForABook(List<Long> authorIds, Long bookId);
+
+    // 根据书籍ID获取作者列表
+    List<AuthorDTO> getAuthorsByBookId(Long bookId);
 
     // 根据categoryId搜索书籍
     // // Update 借书 数量-1
