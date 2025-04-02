@@ -42,10 +42,10 @@ public class AuthorController {
     public List<Author> addAuthorsWithCheck(@RequestBody List<String> authorNames) {
         return authorService.addAuthorsWithCheck(authorNames);
     }
+
     /*
      * [
   "pang"
 ]
      */
-
 }

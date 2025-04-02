@@ -19,5 +19,4 @@ public class BookAuthorDTO implements Serializable {
     private List<Long> authorIds;
     @Column(name = "book_id")
     private Long bookId;
-
 }

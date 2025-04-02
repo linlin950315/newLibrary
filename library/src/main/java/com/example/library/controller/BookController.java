@@ -132,7 +132,15 @@ public class BookController {
         bookService.setAuthorsForABook(bookAuthordto.getAuthorIds(), bookAuthordto.getBookId());
         return Result.success();
     }
+
     /*
+     *   {
+        "authorIds":[7,8,2] ,
+        "bookId":26378
+    }
+     */
+
+ /*
  *    {
         "authorIds":[1,2,3],
         "bookId": 103
@@ -151,8 +159,15 @@ public class BookController {
     /*
  *    {
 [1,2,3]
-}
-     */
+}     */
+    //根据authorId查相应的书
+    @GetMapping("/getBooksByAuthorId/{authorId}")
+    public List<Book> getBooksByAuthorId(@PathVariable Long authorId) {
+        System.out.println("----------AutherController---------" + authorId);
+        return bookService.getBooksByAuthorId(authorId);
+
+    }
+
 // * Update 借书 数量-1
 // */
 // @PutMapping("/{book_id}")

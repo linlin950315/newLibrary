@@ -95,10 +95,10 @@ public class BookServiceImpl implements BookService {
         Pageable pageable = PageRequest.of(page, size, Sort.by(sortDirection, sortBy));
 
         if (categoryId == null) {
-            System.out.println("BookServiceImpl: Calling findAllByBookNameContaining-----------");
+            System.out.println("L98 BookServiceImpl: Calling findAllByBookNameContaining-----------");
             return bookRepository.findAllByBookNameContaining(keyword, pageable);//TODO auther
         } else {
-            System.out.println("BookServiceImpl: Calling findAllByBookNameContainingAndCategory_CategoryId-----------");
+            System.out.println("L101 BookServiceImpl: Calling findAllByBookNameContainingAndCategory_CategoryId-----------");
             return bookRepository.findAllByBookNameContainingAndCategory_CategoryId(keyword, pageable, categoryId);
         }
 
@@ -163,6 +163,12 @@ public class BookServiceImpl implements BookService {
         System.out.println("BookServiceImpl: ------------Calling bookMapper.update(book)-----------");
         System.out.println("Updating bookvo: " + bookvo);
         bookMapper.updateBookInfo(bookvo);
+    }
+
+    @Override
+    public List<Book> getBooksByAuthorId(Long authorId) {
+        return bookRepository.findAllByAuthors_AuthorId(authorId);
+
     }
 
     // U counts-1

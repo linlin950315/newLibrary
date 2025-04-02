@@ -44,6 +44,8 @@ public interface BookService {
     // 根据书籍ID获取作者列表
     List<AuthorDTO> getAuthorsByBookId(Long bookId);
 
+    List<Book> getBooksByAuthorId(Long authorId);
+
     // 根据categoryId搜索书籍
     // // Update 借书 数量-1
     // void borrowABook(Book book);
